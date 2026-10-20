@@ -1,4 +1,5 @@
 import streamlit as st
+import datetime
 
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
@@ -36,9 +37,12 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Сессияда сыныптар тізімін сақтау (7 «А», 7 «Ә»)
+# Сессияда сыныптар тізімін және нәтижелер базасын сақтау
 if 'classes_list' not in st.session_state:
     st.session_state.classes_list = ["7 «А»", "7 «Ә»"]
+
+if 'results_db' not in st.session_state:
+    st.session_state.results_db = {}
 
 # 3. Режимді таңдау
 mode = st.radio("Режимді таңдаңыз:", ["👨‍🎓 Оқушы режимі", "👩‍🏫 Мұғалім кабинеті"], horizontal=True)
@@ -66,7 +70,7 @@ topics_list = [
 if mode == "👩‍🏫 Мұғалім кабинеті":
     st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті")
     
-    with st.expander("📊 Teacher Dashboard — Сыныптар мен нәтижелерді ашу", expanded=True):
+    with st.expander("📊 Teacher Dashboard — Сыныптар мен оқушылар нәтижелері", expanded=True):
         col1, col2 = st.columns([2, 1])
         with col1:
             selected_class = st.selectbox("Сыныпты таңдаңыз:", st.session_state.classes_list)
@@ -84,10 +88,18 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
                     
         st.info(f"Атырау облысы, Аққыстау орта мектебі | Таңдалған сынып: **{selected_class}**")
 
+        st.markdown(f"### 📋 **{selected_class}** оқушыларының тапсырма нәтижелері:")
+        
+        # Деректерді қауіпсіз тексеріп шығару
+        if selected_class in st.session_state.results_db and len(st.session_state.results_db[selected_class]) > 0:
+            st.table(st.session_state.results_db[selected_class])
+        else:
+            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ. Оқушылар тапсырма тапсырған соң мұнда тізім шығады.")
+
     st.subheader("⚙️ Сабақ баптаулары мен оқушы сілтемесі")
     save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
     
-    selected_topic_teacher = st.selectbox("Тақырыпты таңдаңыз:", topics_list)
+    selected_topic_teacher = st.selectbox("Тақырыпты таңдаңыз:", topics_list, key="teacher_topic")
     lesson_timer = st.number_input("Сабақ таймері (минут):", min_value=5, max_value=45, value=15)
     
     st.info(f"💡 **Таңдалған бөлім/тақырып:** {selected_topic_teacher}")
@@ -103,7 +115,9 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
 
     st.subheader("🗑️ Базаны басқару")
     if st.button("Барлық сақталған нәтижелерді тазарту"):
+        st.session_state.results_db = {}
         st.success("✨ Дерекқор сәтті тазартылды!")
+        st.rerun()
 
 # ==========================================
 # 👨‍🎓 ОҚУШЫ РЕЖИМІ
@@ -117,7 +131,7 @@ else:
     with col_s2:
         student_name = st.text_input("Аты-жөніңізді енгізіңіз:", placeholder="Мысалы: Айдын Әбілқайыр")
 
-    selected_topic = st.selectbox("Тақырыпты таңдаңыз:", topics_list)
+    selected_topic = st.selectbox("Тақырыпты таңдаңыз:", topics_list, key="student_topic")
     st.divider()
 
     # --- 1-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
@@ -142,13 +156,27 @@ else:
         ans1_5 = st.selectbox("5. Резервтік көшірме", match_opts1, key="m1_5")
 
         if st.button("Нәтижені тексеру", key="chk_btn_m1"):
-            score1 = 0
-            if "C) Әріптерден" in ans1_1: score1 += 2
-            if "D) Пайдаланушының жеке басын" in ans1_2: score1 += 2
-            if "B) Компьютерді вирустардан" in ans1_3: score1 += 2
-            if "A) Файлдардың көлемін" in ans1_4: score1 += 2
-            if "E) Ақпарат жоғалған жағдайда" in ans1_5: score1 += 2
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score1} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score1 = 0
+                if "C) Әріптерден" in ans1_1: score1 += 2
+                if "D) Пайдаланушының жеке басын" in ans1_2: score1 += 2
+                if "B) Компьютерді вирустардан" in ans1_3: score1 += 2
+                if "A) Файлдардың көлемін" in ans1_4: score1 += 2
+                if "E) Ақпарат жоғалған жағдайда" in ans1_5: score1 += 2
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "1-тақырып",
+                    "Ұпай": f"{score1} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score1} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 2-ТАҚЫРЫП (ТЕСТ) ---
     elif "2." in selected_topic:
@@ -195,18 +223,32 @@ else:
         ], key="t2_10")
 
         if st.button("Нәтижені тексеру", key="chk_btn_2"):
-            score = 0
-            if "Бас және кіші әріптерді" in q1: score += 1
-            if "Екі сатылы аутентификация" in q2: score += 1
-            if "Антивирустық бағдарламалық" in q3: score += 1
-            if "Резервтік көшірме жасау" in q4: score += 1
-            if "Хаттың күдікті екенін" in q5: score += 1
-            if "Қауіпсіздік осалдықтарын" in q6: score += 1
-            if "Желіге күрделі құпиясөз" in q7: score += 1
-            if "Компьютердің жұмысын баптау" in q8: score += 1
-            if "Жіберушіні тексеріп" in q9: score += 1
-            if "Жеке деректерді қорғау" in q10: score += 1
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score = 0
+                if "Бас және кіші әріптерді" in q1: score += 1
+                if "Екі сатылы аутентификация" in q2: score += 1
+                if "Антивирустық бағдарламалық" in q3: score += 1
+                if "Резервтік көшірме жасау" in q4: score += 1
+                if "Хаттың күдікті екенін" in q5: score += 1
+                if "Қауіпсіздік осалдықтарын" in q6: score += 1
+                if "Желіге күрделі құпиясөз" in q7: score += 1
+                if "Компьютердің жұмысын баптау" in q8: score += 1
+                if "Жіберушіні тексеріп" in q9: score += 1
+                if "Жеке деректерді қорғау" in q10: score += 1
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "2-тақырып (Тест)",
+                    "Ұпай": f"{score} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 3-ТАҚЫРЫП ---
     elif "3." in selected_topic:
@@ -231,18 +273,32 @@ else:
         q10 = st.radio("10. Төмендегі қайсысы ақпарат көлемін өлшеу бірлігі?", ["А) Секунд", "Б) Градус", "В) Мегабайт", "Г) Метр"], key="t4_10")
 
         if st.button("Нәтижені тексеру", key="chk_btn_4"):
-            score = 0
-            if "Бит" in q1: score += 1
-            if "8 бит" in q2: score += 1
-            if "1024 байт" in q3: score += 1
-            if "4 фильм" in q4: score += 1
-            if "Байт → Килобайт" in q5: score += 1
-            if "10 МБ" in q6: score += 1
-            if "1024-ке көбейту" in q7: score += 1
-            if "32 альбом" in q8: score += 1
-            if "1 байт" in q9: score += 1
-            if "Мегабайт" in q10: score += 1
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score = 0
+                if "Бит" in q1: score += 1
+                if "8 бит" in q2: score += 1
+                if "1024 байт" in q3: score += 1
+                if "4 фильм" in q4: score += 1
+                if "Байт → Килобайт" in q5: score += 1
+                if "10 МБ" in q6: score += 1
+                if "1024-ке көбейту" in q7: score += 1
+                if "32 альбом" in q8: score += 1
+                if "1 байт" in q9: score += 1
+                if "Мегабайт" in q10: score += 1
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "4-тақырып (Тест)",
+                    "Ұпай": f"{score} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 5-ТАҚЫРЫП ---
     elif "5." in selected_topic:
@@ -273,13 +329,27 @@ else:
         ans6_5 = st.selectbox("5. Монохромды кескін", match_opts6, key="m6_5")
 
         if st.button("Нәтижені тексеру", key="chk_btn_m6"):
-            score6 = 0
-            if "C) Ақпаратты белгілі бір" in ans6_1: score6 += 2
-            if "A) Кодталған ақпаратты" in ans6_2: score6 += 2
-            if "D) Мәтіндік таңбаларды" in ans6_3: score6 += 2
-            if "B) Әртүрлі тілдердің" in ans6_4: score6 += 2
-            if "E) Тек екі түстен" in ans6_5: score6 += 2
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score6} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score6 = 0
+                if "C) Ақпаратты белгілі бір" in ans6_1: score6 += 2
+                if "A) Кодталған ақпаратты" in ans6_2: score6 += 2
+                if "D) Мәтіндік таңбаларды" in ans6_3: score6 += 2
+                if "B) Әртүрлі тілдердің" in ans6_4: score6 += 2
+                if "E) Тек екі түстен" in ans6_5: score6 += 2
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "6-тақырып",
+                    "Ұпай": f"{score6} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score6} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 7-ТАҚЫРЫП ---
     elif "7." in selected_topic:
@@ -311,18 +381,32 @@ else:
         q10 = st.radio("10. 3D модель жасауға арналған бағдарламаны атаңыз:", ["А) Blender немесе 3ds Max", "Б) Microsoft Paint", "В) Notepad", "Г) Calculator"], key="t9_10")
 
         if st.button("Нәтижені тексеру", key="chk_btn_9"):
-            score = 0
-            if "Кеңістіктегі тереңдік" in q1: score += 1
-            if "Компьютерлік модельдеу" in q2: score += 1
-            if "X, Y және Z" in q3: score += 1
-            if "Жарық көздерін орнатып" in q4: score += 1
-            if "Дизайн, сәулет және құрылыс" in q5: score += 1
-            if "Модельдің камера түсіретін" in q6: score += 1
-            if ".obj, .fbx, .stl" in q7: score += 1
-            if "Материал немесе текстура" in q8: score += 1
-            if "Қымбат материалдарды" in q9: score += 1
-            if "Blender немесе 3ds Max" in q10: score += 1
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score = 0
+                if "Кеңістіктегі тереңдік" in q1: score += 1
+                if "Компьютерлік модельдеу" in q2: score += 1
+                if "X, Y және Z" in q3: score += 1
+                if "Жарық көздерін орнатып" in q4: score += 1
+                if "Дизайн, сәулет және құрылыс" in q5: score += 1
+                if "Модельдің камера түсіретін" in q6: score += 1
+                if ".obj, .fbx, .stl" in q7: score += 1
+                if "Материал немесе текстура" in q8: score += 1
+                if "Қымбат материалдарды" in q9: score += 1
+                if "Blender немесе 3ds Max" in q10: score += 1
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "9-тақырып",
+                    "Ұпай": f"{score} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 10-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
     elif "10." in selected_topic:
@@ -349,18 +433,32 @@ else:
         c10 = st.selectbox("10. Оқушы дөңгелек шамның көлемді моделін жасау үшін цилиндрдің үстіңгі және астыңғы бөліктерін өңдеді.", opts3, key="m3_10")
 
         if st.button("Нәтижені тексеру", key="chk_m3"):
-            score = 0
-            if "З) Цилиндр примитивін пайдалану" in c1: score += 1
-            if "А) Move — нысанды жылжыту" in c2: score += 1
-            if "Ә) Scale — нысанның өлшемін өзгерту" in c3: score += 1
-            if "Г) Айналу денесін құру" in c4: score += 1
-            if "Ғ) Extrude — нысанның бетін созу" in c5: score += 1
-            if "Б) Rotate — нысанды бұру" in c6: score += 1
-            if "Д) Примитивтерді біріктіріп" in c7: score += 1
-            if "Ж) Нысанның биіктігі мен радиусын" in c8: score += 1
-            if "Е) Нысанның геометриялық" in c9: score += 1
-            if "В) Графикалық примитивтерді" in c10: score += 1
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score = 0
+                if "З) Цилиндр примитивін пайдалану" in c1: score += 1
+                if "А) Move — нысанды жылжыту" in c2: score += 1
+                if "Ә) Scale — нысанның өлшемін өзгерту" in c3: score += 1
+                if "Г) Айналу денесін құру" in c4: score += 1
+                if "Ғ) Extrude — нысанның бетін созу" in c5: score += 1
+                if "Б) Rotate — нысанды бұру" in c6: score += 1
+                if "Д) Примитивтерді біріктіріп" in c7: score += 1
+                if "Ж) Нысанның биіктігі мен радиусын" in c8: score += 1
+                if "Е) Нысанның геометриялық" in c9: score += 1
+                if "В) Графикалық примитивтерді" in c10: score += 1
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "10-тақырып",
+                    "Ұпай": f"{score} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 11-ТАҚЫРЫП (ТЕСТ) ---
     elif "11." in selected_topic:
@@ -378,18 +476,32 @@ else:
         q10 = st.radio("10. 3D модельдеу тапсырмасы оқушының қандай дағдысын дамытады?", ["А) Кеңістіктік ойлау мен шығармашылық қабілетті", "Б) Тек жылдам теруді", "В) Сурет салудан бас тартуды", "Г) Тек мәтіндік құжат жасауды"], key="t11_10")
 
         if st.button("Нәтижені тексеру", key="chk_btn_11"):
-            score = 0
-            if "Графикалық примитивтер" in q1: score += 1
-            if "Құмыраның қимасын ось бойымен" in q2: score += 1
-            if "Move (Жылжыту)" in q3: score += 1
-            if "Scale (Масштабтау)" in q4: score += 1
-            if "Rotate (Бұру)" in q5: score += 1
-            if "Үстел, орындық немесе басқа" in q6: score += 1
-            if "Биіктігі мен радиусын" in q7: score += 1
-            if "Төбелер (Vertices)" in q8: score += 1
-            if "Extrude (Созу/шығару)" in q9: score += 1
-            if "Кеңістіктік ойлау" in q10: score += 1
-            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            if not student_name.strip():
+                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
+            else:
+                score = 0
+                if "Графикалық примитивтер" in q1: score += 1
+                if "Құмыраның қимасын ось бойымен" in q2: score += 1
+                if "Move (Жылжыту)" in q3: score += 1
+                if "Scale (Масштабтау)" in q4: score += 1
+                if "Rotate (Бұру)" in q5: score += 1
+                if "Үстел, орындық немесе басқа" in q6: score += 1
+                if "Биіктігі мен радиусын" in q7: score += 1
+                if "Төбелер (Vertices)" in q8: score += 1
+                if "Extrude (Созу/шығару)" in q9: score += 1
+                if "Кеңістіктік ойлау" in q10: score += 1
+                
+                result_entry = {
+                    "Оқушы аты": student_name,
+                    "Тақырып": "11-тақырып",
+                    "Ұпай": f"{score} / 10",
+                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                if student_class not in st.session_state.results_db:
+                    st.session_state.results_db[student_class] = []
+                st.session_state.results_db[student_class].append(result_entry)
+                
+                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
 
     # --- 12-ТАҚЫРЫП ---
     elif "12." in selected_topic:
