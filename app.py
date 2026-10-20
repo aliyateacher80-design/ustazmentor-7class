@@ -202,9 +202,12 @@ else:
             if "Жеке деректерді қорғау" in q10: score += 1
             st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
-    # --- 3, 5, 7, 8, 12-ТАҚЫРЫПТАР (Бос) ---
-    elif any(t in selected_topic for t in ["3.", "5.", "7.", "8.", "12."]):
-        st.info("📌 Бұл тақырыптың тапсырмалары әзірлену үстінде, кейін толықтырылады.")
+    # --- 3-ТАҚЫРЫП ---
+    elif "3." in selected_topic:
+        st.markdown("### 📖 3-тақырып: Ақпараттың өлшем бірліктері")
+        st.markdown("**Оқу мақсаты:** 7.2.1.1 — ақпаратты бір өлшем бірліктен басқа өлшем бірлікке аударуды жүзеге асыру.")
+        st.markdown("Төмендегі батырманы басып, интерактивті **«Смартфон жадын сақтау операциясы»** кейс-ойынын ойнаңыз:")
+        st.link_button("🚀 3-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/game-3topic/")
 
     # --- 4-ТАҚЫРЫП (ТЕСТ) ---
     elif "4." in selected_topic:
@@ -235,6 +238,13 @@ else:
             if "Мегабайт" in q10: score += 1
             st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
+    # --- 5-ТАҚЫРЫП ---
+    elif "5." in selected_topic:
+        st.markdown("### 🚀 5-тақырып: Ақпаратты өлшеу")
+        st.markdown("**Оқу мақсаты:** 7.2.1.2 — алфавиттік тәсілді қолданып ақпарат көлемін анықтау.")
+        st.markdown("Төмендегі батырманы басып, ғарыштық аркада ойынын ойнаңыз:")
+        st.link_button("🚀 5-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/raketa-game/")
+
     # --- 6-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
     elif "6." in selected_topic:
         st.markdown("### 🔤 6-тақырып: Мәтіндік ақпаратты және монохромды кескіндерді (ASCII, Unicode) кодтау")
@@ -264,6 +274,20 @@ else:
             if "B) Әртүрлі тілдердің" in ans6_4: score6 += 2
             if "E) Тек екі түстен" in ans6_5: score6 += 2
             st.success(f"🎉 Сіз 10 ұпайдан **{score6} ұпай** жинадыңыз!")
+
+    # --- 7-ТАҚЫРЫП ---
+    elif "7." in selected_topic:
+        st.markdown("### 💻 7-тақырып: Мәтіндік ақпаратты және монохромды кескіндерді (ASCII, Unicode) кодтау. Практикалық жұмыс")
+        st.markdown("**Оқу мақсаты:** 7.2.1.3 — мәтіндік ақпаратты және монохромды кескіндерді кодтау және декодтау алгоритмдерін қолдану.")
+        st.markdown("Төмендегі батырманы басып, **ASCII & Pixel Hacker** ойынын ойнаңыз:")
+        st.link_button("💻 7-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/kod-game-7/")
+
+    # --- 8-ТАҚЫРЫП ---
+    elif "8." in selected_topic:
+        st.markdown("### 🧊 8-тақырып: Үш өлшемді графика редакторы")
+        st.markdown("**Оқу мақсаты:** 7.3.2.1 — компьютерлік модельдерді қолдануға мысалдар келтіру.")
+        st.markdown("Төмендегі батырманы басып, **3D Cyber Architect** ойынын ойнаңыз:")
+        st.link_button("🧊 8-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/space_architect_game/")
 
     # --- 9-ТАҚЫРЫП (ТЕСТ) ---
     elif "9." in selected_topic:
@@ -360,6 +384,13 @@ else:
             if "Extrude (Созу/шығару)" in q9: score += 1
             if "Кеңістіктік ойлау" in q10: score += 1
             st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+
+    # --- 12-ТАҚЫРЫП ---
+    elif "12." in selected_topic:
+        st.markdown("### 🎬 12-тақырып: 3D анимация")
+        st.markdown("**Оқу мақсаты:** 7.3.2.2 — 3D редакторы құралдарын пайдаланып, кілттік кадрлардағы нысандардың орнын, айналуын, масштабын орнату.")
+        st.markdown("Төмендегі батырманы басып, **3D Animation Studio** ойынын ойнаңыз:")
+        st.link_button("🎬 12-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/gamt-gamr77/")
 
 st.divider()
 st.markdown("<p style='text-align: center; color: #888;'>UstazMentor © 2026 | Аққыстау орта мектебі</p>", unsafe_allow_html=True)
