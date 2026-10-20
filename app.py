@@ -111,6 +111,12 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
 else:
     st.subheader("👨‍🎓 Оқушы режимі: Сабақ тапсырмалары")
     
+    col_s1, col_s2 = st.columns(2)
+    with col_s1:
+        student_class = st.selectbox("Сыныбыңызды таңдаңыз:", st.session_state.classes_list, key="student_class_select")
+    with col_s2:
+        student_name = st.text_input("Аты-жөніңізді енгізіңіз:", placeholder="Мысалы: Айдын Әбілқайыр")
+
     selected_topic = st.selectbox("Тақырыпты таңдаңыз:", topics_list)
     st.divider()
 
@@ -142,7 +148,7 @@ else:
             if "B) Компьютерді вирустардан" in ans1_3: score1 += 2
             if "A) Файлдардың көлемін" in ans1_4: score1 += 2
             if "E) Ақпарат жоғалған жағдайда" in ans1_5: score1 += 2
-            st.success(f"🎉 Сіз 10 ұпайдан **{score1} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score1} ұпай** жинадыңыз!")
 
     # --- 2-ТАҚЫРЫП (ТЕСТ) ---
     elif "2." in selected_topic:
@@ -200,7 +206,7 @@ else:
             if "Компьютердің жұмысын баптау" in q8: score += 1
             if "Жіберушіні тексеріп" in q9: score += 1
             if "Жеке деректерді қорғау" in q10: score += 1
-            st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 3-ТАҚЫРЫП ---
     elif "3." in selected_topic:
@@ -236,7 +242,7 @@ else:
             if "32 альбом" in q8: score += 1
             if "1 байт" in q9: score += 1
             if "Мегабайт" in q10: score += 1
-            st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 5-ТАҚЫРЫП ---
     elif "5." in selected_topic:
@@ -273,7 +279,7 @@ else:
             if "D) Мәтіндік таңбаларды" in ans6_3: score6 += 2
             if "B) Әртүрлі тілдердің" in ans6_4: score6 += 2
             if "E) Тек екі түстен" in ans6_5: score6 += 2
-            st.success(f"🎉 Сіз 10 ұпайдан **{score6} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score6} ұпай** жинадыңыз!")
 
     # --- 7-ТАҚЫРЫП ---
     elif "7." in selected_topic:
@@ -316,7 +322,7 @@ else:
             if "Материал немесе текстура" in q8: score += 1
             if "Қымбат материалдарды" in q9: score += 1
             if "Blender немесе 3ds Max" in q10: score += 1
-            st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 10-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
     elif "10." in selected_topic:
@@ -354,7 +360,7 @@ else:
             if "Ж) Нысанның биіктігі мен радиусын" in c8: score += 1
             if "Е) Нысанның геометриялық" in c9: score += 1
             if "В) Графикалық примитивтерді" in c10: score += 1
-            st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 11-ТАҚЫРЫП (ТЕСТ) ---
     elif "11." in selected_topic:
@@ -383,7 +389,7 @@ else:
             if "Төбелер (Vertices)" in q8: score += 1
             if "Extrude (Созу/шығару)" in q9: score += 1
             if "Кеңістіктік ойлау" in q10: score += 1
-            st.success(f"🎉 Сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
+            st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 12-ТАҚЫРЫП ---
     elif "12." in selected_topic:
