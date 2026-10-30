@@ -4,110 +4,111 @@ import datetime
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
     page_title="UstazMentor - 7-сынып Информатика",
-    page_icon="📖",
+    page_icon="💻",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 2. ЖЫЛЫ ҚОҢЫР КІТАП ЭСТЕТИКАЛЫҚ ДИЗАЙНЫ (BOOK AESTHETIC)
+# 2. ЖАҢАРТЫЛҒАН ЗАМАНАУИ «MODERN EDU» СТИЛІ ЖӘНЕ БАТЫРМАЛАР
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Кітап парағы тәрізді жұмсақ кофе және пергамент фоны */
+    /* Жұмсақ заманауи кремді-ақ фон */
     html, body, [data-testid="stAppViewContainer"] {
-        background: #f4eee1 !important;
-        font-family: 'Merriweather', serif !important;
-        color: #2c221e !important;
+        background: #f8fafc !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: #1e293b !important;
     }
 
     [data-testid="stSidebar"] {
-        background: #e6dfd1 !important;
-        border-right: 1px solid #d5cbb7 !important;
+        background: #ffffff !important;
+        border-right: 1px solid #e2e8f0 !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* Барлық мәтіндер кітап шрифтімен және қоңыр түсте */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #2c221e !important;
-        font-family: 'Merriweather', serif !important;
-    }
-
-    /* Жоғарғы басты баннер — кітап мұқабасы стилінде */
+    /* Жоғарғы басты баннер (Заманауи корпоративті стиль) */
     .main-header {
-        background: #4a3525;
-        border: 2px solid #8c6d53;
-        border-radius: 14px;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        border-radius: 16px;
         padding: 25px;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 4px 15px rgba(44, 34, 30, 0.15);
+        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
     }
     .main-header h1 {
-        color: #fdfbf7 !important;
+        color: #ffffff !important;
         font-size: 2.2rem;
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 5px;
     }
     .main-header p {
-        color: #dcd6c8 !important;
+        color: #e0e7ff !important;
         font-size: 1rem;
         margin: 0;
     }
 
-    /* Кітап беті немесе карточка блоктары */
+    /* Карточкалар мен контейнерлер */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: #fdfbf7 !important;
-        border: 1px solid #d5cbb7 !important;
-        border-radius: 12px !important;
-        box-shadow: 0 3px 10px rgba(44, 34, 30, 0.06) !important;
-        padding: 15px !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+        padding: 20px !important;
     }
 
-    /* Батырмалар — «Кітап закладкасы» / былғары түптеме стилінде */
+    /* === БАТЫРМАЛАРДЫ ТҮБЕГЕЙЛІ ӨЗГЕРТУ === */
     .stButton > button {
-        background: #5c4033 !important;
-        color: #fdfbf7 !important;
-        font-weight: 600 !important;
-        border: 1px solid #3e2723 !important;
-        border-radius: 8px !important;
-        padding: 0.6rem 2rem !important;
-        box-shadow: 0 2px 6px rgba(44, 34, 30, 0.2) !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 0.75rem 2rem !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.3s ease !important;
+        width: 100%;
     }
     .stButton > button:hover {
-        background: #3e2723 !important;
-        color: #ffffff !important;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(44, 34, 30, 0.3) !important;
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4) !important;
+    }
+
+    /* Сілтеме батырмалары (Link Button) үшін */
+    .stLinkButton > a {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        padding: 0.75rem 2rem !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+    }
+    .stLinkButton > a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
     }
 
     /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: #fdfbf7 !important;
-        border: 1px solid #bcaaa4 !important;
-        border-radius: 8px !important;
-        color: #2c221e !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-    }
-
-    /* Кестелер мен радио батырмалар */
-    [data-testid="stTable"], [data-testid="stDataFrame"] {
-        background: #fdfbf7 !important;
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
         border-radius: 10px !important;
-        border: 1px solid #d5cbb7 !important;
+        color: #1e293b !important;
     }
 
-    .stRadio label {
-        color: #2c221e !important;
-        font-weight: 500 !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    /* Мәтіндердің түсі */
+    h1, h2, h3, h4, h5, h6, p, span, label {
+        color: #1e293b !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -115,7 +116,7 @@ st.markdown("""
 # Басты беттің баннері
 st.markdown("""
     <div class="main-header">
-        <h1>UstazMentor 📖 7-сынып</h1>
+        <h1>UstazMentor 💻 7-сынып</h1>
         <p>Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
     </div>
 """, unsafe_allow_html=True)
