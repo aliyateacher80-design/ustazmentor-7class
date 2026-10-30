@@ -3,82 +3,75 @@ import datetime
 
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
-    page_title="UstazMentor - Duolingo Edition",
+    page_title="ҰстазМентор 7 сынып | Duolingo Edition",
     page_icon="🦉",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-# 2. DUOLINGO СТИЛІ ЖӘНЕ 3D ТАКТИЛЬДІ БАТЫРМАТАР
+# 2. FULL UI REDESIGN: DUOLINGO + CANVA PREMIUM CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
-    /* Duolingo стиліндегі жұмсақ ақшыл-көкшіл фон */
+    /* Негізгі фон мен қауіпсіз пастельді палитра */
     html, body, [data-testid="stAppViewContainer"] {
         background: #f7f9fc !important;
         font-family: 'Nunito', sans-serif !important;
         color: #3c4257 !important;
     }
 
-    [data-testid="stSidebar"] {
-        background: #ffffff !important;
-        border-right: 2px solid #e5e7eb !important;
+    [data-testid="stHeader"], [data-testid="stSidebar"] {
+        display: none !important;
     }
 
-    [data-testid="stHeader"] {
-        background: transparent !important;
-    }
-
-    /* Барлық мәтіндер */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #3c4257 !important;
-        font-family: 'Nunito', sans-serif !important;
-    }
-
-    /* Duolingo баннері (Яркий, ойын стилінде) */
-    .main-header {
+    /* SaaS Dashboard & Duolingo Hero Section */
+    .hero-banner {
         background: linear-gradient(135deg, #58cc02 0%, #1cb0f6 100%);
-        border-radius: 24px;
-        padding: 30px;
+        border-radius: 28px;
+        padding: 40px;
         text-align: center;
-        margin-bottom: 25px;
-        box-shadow: 0 8px 0 #3b9c00, 0 15px 25px rgba(88, 204, 2, 0.2);
-        border: 3px solid #ffffff;
+        color: white;
+        box-shadow: 0 10px 0 #3b9c00, 0 20px 30px rgba(88, 204, 2, 0.25);
+        margin-bottom: 30px;
+        border: 4px solid #ffffff;
     }
-    .main-header h1 {
-        color: #ffffff !important;
-        font-size: 2.5rem;
+    .hero-banner h1 {
+        font-size: 2.8rem;
         font-weight: 900;
-        margin-bottom: 5px;
-        text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        margin-bottom: 10px;
+        text-shadow: 0 3px 0 rgba(0,0,0,0.15);
     }
-    .main-header p {
-        color: #f0fdf4 !important;
-        font-size: 1.1rem;
+    .hero-banner p {
+        font-size: 1.2rem;
         font-weight: 700;
-        margin: 0;
+        opacity: 0.95;
     }
 
-    /* Карточкалар (Қалың жиекті, жұмсақ дөңгеленген Duolingo карточкалары) */
-    div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: #ffffff !important;
-        border: 2px solid #e5e7eb !important;
-        border-radius: 20px !important;
-        box-shadow: 0 6px 0 #e5e7eb !important;
-        padding: 22px !important;
-        margin-bottom: 15px !important;
+    /* Ойын карточкалары мен контейнерлер */
+    .game-card {
+        background: #ffffff;
+        border: 3px solid #e5e7eb;
+        border-radius: 24px;
+        padding: 25px;
+        box-shadow: 0 8px 0 #e5e7eb;
+        margin-bottom: 20px;
+        transition: all 0.2s ease;
+    }
+    .game-card:hover {
+        border-color: #1cb0f6;
+        transform: translateY(-2px);
     }
 
-    /* DUOLINGO 3D ТАКТИЛЬДІ БАТЫРМАЛАР (Басқан кезде төмен түсетін эффект) */
+    /* 3D Тактильді батырмалар */
     .stButton > button {
         background-color: #58cc02 !important;
         color: #ffffff !important;
         font-weight: 800 !important;
-        font-size: 1.1rem !important;
+        font-size: 1.15rem !important;
         border: none !important;
-        border-radius: 16px !important;
-        padding: 0.75rem 2rem !important;
+        border-radius: 18px !important;
+        padding: 0.85rem 2rem !important;
         box-shadow: 0 6px 0 #46a302 !important;
         transition: all 0.1s ease !important;
         width: 100%;
@@ -87,21 +80,20 @@ st.markdown("""
     }
     .stButton > button:hover {
         background-color: #61d803 !important;
-        box-shadow: 0 6px 0 #46a302 !important;
-        transform: translateY(-1px);
+        transform: translateY(-2px);
     }
     .stButton > button:active {
         transform: translateY(4px) !important;
         box-shadow: 0 2px 0 #46a302 !important;
     }
 
-    /* Сілтеме батырмалары (Көк Duolingo стиль) */
+    /* Сілтеме батырмалары */
     .stLinkButton > a {
         background-color: #1cb0f6 !important;
         color: #ffffff !important;
         font-weight: 800 !important;
-        border-radius: 16px !important;
-        padding: 0.75rem 2rem !important;
+        border-radius: 18px !important;
+        padding: 0.85rem 2rem !important;
         box-shadow: 0 6px 0 #1899d6 !important;
         text-align: center;
         text-decoration: none;
@@ -118,27 +110,24 @@ st.markdown("""
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
         background: #f7f9fc !important;
-        border: 2px solid #e5e7eb !important;
+        border: 3px solid #e5e7eb !important;
         border-radius: 16px !important;
         color: #3c4257 !important;
         font-weight: 700 !important;
-        padding: 10px 15px !important;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.02) !important;
+        padding: 12px 18px !important;
     }
-    .stTextInput > div > div > input:focus,
-    .stSelectbox > div > div > div:focus {
+    .stTextInput > div > div > input:focus {
         border-color: #1cb0f6 !important;
-        box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.2) !important;
+    }
+
+    /* Expander және кестелерді заманауиландыру */
+    div.stExpander {
+        background: #ffffff !important;
+        border: 3px solid #e5e7eb !important;
+        border-radius: 20px !important;
+        box-shadow: 0 6px 0 #e5e7eb !important;
     }
 </style>
-""", unsafe_allow_html=True)
-
-# Басты баннер
-st.markdown("""
-    <div class="main-header">
-        <h1>🦉 UstazMentor • Duolingo Edition</h1>
-        <p>💚 Бір тақырып — бір өмірлік жағдаят — нақты нәтиже! Ойна, үйрен, жеңіске жет!</p>
-    </div>
 """, unsafe_allow_html=True)
 
 # Сессияда сыныптар мен нәтижелерді сақтау
@@ -148,9 +137,18 @@ if 'classes_list' not in st.session_state:
 if 'results_db' not in st.session_state:
     st.session_state.results_db = {}
 
-# 3. Режимді таңдау
-mode = st.radio("Режимді таңдаңыз:", ["👨‍🎓 Оқушы режимі", "👩‍🏫 Мұғалім кабинеті"], horizontal=True)
-st.divider()
+# 3. HERO SECTION (Басты жоғарғы блок)
+st.markdown("""
+    <div class="hero-banner">
+        <h1>🦉 ҰстазМентор 7 сынып</h1>
+        <p>🚀 Информатиканы ойын түрінде меңгер! Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
+    </div>
+""", unsafe_allow_html=True)
+
+# 4. CUSTOM NAVIGATION PANEL (Интерфейстің негізгі панелі)
+nav_col1, nav_col2 = st.columns(2)
+with nav_col1:
+    mode = st.radio("🎯 Платформа режимін таңдаңыз:", ["👨‍🎓 Оқушы режимі (Game Hub)", "👩‍🏫 Мұғалім кабинеті (SaaS Dashboard)"], horizontal=True)
 
 # 13 ресми тақырып тізімі
 topics_list = [
@@ -169,17 +167,19 @@ topics_list = [
     "13. Қорытынды практикалық жоба"
 ]
 
+st.divider()
+
 # ==========================================
-# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ
+# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ (SaaS Dashboard)
 # ==========================================
-if mode == "👩‍🏫 Мұғалім кабинеті":
-    st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті (Teacher Dashboard)")
+if mode == "👩‍🏫 Мұғалім кабинеті (SaaS Dashboard)":
+    st.markdown("### 📊 Teacher Analytics & Control Center")
     
-    with st.expander("📊 Сыныптар мен оқушылар нәтижелері", expanded=True):
-        col1, col2 = st.columns([2, 1])
-        with col1:
+    with st.expander("📈 Сыныптар мен оқушылардың рейтингтік нәтижелері", expanded=True):
+        col_d1, col_d2 = st.columns([2, 1])
+        with col_d1:
             selected_class = st.selectbox("Сыныпты таңдаңыз:", st.session_state.classes_list)
-        with col2:
+        with col_d2:
             new_class_name = st.text_input("Жаңа сынып қосу (мысалы: 7 «Б»):")
             if st.button("Сыныпты қосу"):
                 if new_class_name and new_class_name not in st.session_state.classes_list:
@@ -191,50 +191,51 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
                 else:
                     st.info("ℹ️ Бұл сынып тізімде бар.")
                     
-        st.info(f"Атырау облысы, Аққыстау орта мектебі | Таңдалған сынып: **{selected_class}**")
+        st.info(f"🏫 Атырау облысы, Аққыстау орта мектебі | Белсенді сынып: **{selected_class}**")
 
-        st.markdown(f"### 📋 **{selected_class}** оқушыларының тапсырма нәтижелері:")
+        st.markdown(f"#### 📋 **{selected_class}** оқушыларының тапсырма нәтижелері:")
         
         if selected_class in st.session_state.results_db and len(st.session_state.results_db[selected_class]) > 0:
             st.table(st.session_state.results_db[selected_class])
         else:
             st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ.")
 
-    st.subheader("⚙️ Сабақ баптаулары мен оқушы сілтемесі")
-    save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
+    st.markdown("---")
+    st.markdown("### ⚙️ Сабақ баптаулары мен оқушы сілтемесі генераторы")
     
-    selected_topic_teacher = st.selectbox("Тақырыпты таңдаңыз:", topics_list, key="teacher_topic")
-    lesson_timer = st.number_input("Сабақ таймері (минут):", min_value=5, max_value=45, value=15)
-    
-    st.info(f"💡 **Таңдалған бөлім/тақырып:** {selected_topic_teacher}")
-    if save_results:
-        st.success("📌 Нәтижелерді сақтау режимі: ҚОСУЛЫ 🟢")
-    else:
-        st.warning("📌 Нәтижелерді сақтау режимі: ӨШІРУЛІ 🔴")
+    col_s1, col_s2 = st.columns(2)
+    with col_s1:
+        save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
+        selected_topic_teacher = st.selectbox("Тақырыпты таңдаңыз:", topics_list, key="teacher_topic")
+    with col_s2:
+        lesson_timer = st.number_input("Сабақ таймері (минут):", min_value=5, max_value=45, value=15)
+        if save_results:
+            st.success("📌 Нәтижелерді сақтау режимі: ҚОСУЛЫ 🟢")
+        else:
+            st.warning("📌 Нәтижелерді сақтау режимі: ӨШІРУЛІ 🔴")
 
-    st.subheader("🔗 Оқушыларға арналған автоматты сілтеме:")
+    st.markdown("#### 🔗 Оқушыларға арналған автоматты сілтеме:")
     app_link = f"https://ustazmentor-7class.streamlit.app/?topic={selected_topic_teacher}&timer={lesson_timer}&save={int(save_results)}"
     st.code(app_link, language="text")
 
-    st.subheader("🗑️ Базаны басқару")
-    if st.button("Барлық сақталған нәтижелерді тазарту"):
+    if st.button("🗑️ Барлық сақталған нәтижелерді тазарту"):
         st.session_state.results_db = {}
         st.success("✨ Дерекқор сәтті тазартылды!")
         st.rerun()
 
 # ==========================================
-# 👨‍🎓 ОҚУШЫ РЕЖИМІ
+# 👨‍🎓 ОҚУШЫ РЕЖИМІ (Game Hub)
 # ==========================================
 else:
-    st.subheader("👨‍🎓 Оқушы режимі: Сабақ тапсырмалары")
+    st.markdown("### 🎮 Оқушы режимі: Тапсырмалар әлемі")
     
-    col_s1, col_s2 = st.columns(2)
-    with col_s1:
+    col_p1, col_p2 = st.columns(2)
+    with col_p1:
         student_class = st.selectbox("Сыныбыңызды таңдаңыз:", st.session_state.classes_list, key="student_class_select")
-    with col_s2:
+    with col_p2:
         student_name = st.text_input("Аты-жөніңізді енгізіңіз:", placeholder="Мысалы: Айдын Әбілқайыр")
 
-    selected_topic = st.selectbox("Тақырыпты таңдаңыз:", topics_list, key="student_topic")
+    selected_topic = st.selectbox("Өтетін тақырыпты таңдаңыз:", topics_list, key="student_topic")
     st.divider()
 
     # --- 1-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
@@ -351,7 +352,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 Жарайсың, {student_class} оқушысы **{student_name}**! 10 ұпайдан **{score} ұпай** жинадың! 🌟")
+                st.success(f"🎉 Жарайсың, {student_class} оқушысы **{student_name}**! 10 ұпайдан **{score} ұпай** жинадыңыз! 🌟")
 
     # --- 3-ТАҚЫРЫП ---
     elif "3." in selected_topic:
