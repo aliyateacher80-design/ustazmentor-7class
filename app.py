@@ -4,115 +4,110 @@ import datetime
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
     page_title="UstazMentor - 7-сынып Информатика",
-    page_icon="💻",
+    page_icon="📖",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 2. СУРЕТТЕГІДЕЙ EXACT NEON CYBERPUNK 3D DESIGN
+# 2. ЖЫЛЫ ҚОҢЫР КІТАП ЭСТЕТИКАЛЫҚ ДИЗАЙНЫ (BOOK AESTHETIC)
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-    /* Терең ғарыштық күңгірт неон фон */
+    /* Кітап парағы тәрізді жұмсақ кофе және пергамент фоны */
     html, body, [data-testid="stAppViewContainer"] {
-        background: radial-gradient(circle at 10% 10%, rgba(127, 0, 255, 0.2) 0%, transparent 40%),
-                    radial-gradient(circle at 90% 90%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
-                    #070411 !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #ffffff !important;
+        background: #f4eee1 !important;
+        font-family: 'Merriweather', serif !important;
+        color: #2c221e !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(10, 7, 24, 0.9) !important;
-        backdrop-filter: blur(20px) !important;
-        border-right: 1px solid rgba(224, 64, 251, 0.3) !important;
+        background: #e6dfd1 !important;
+        border-right: 1px solid #d5cbb7 !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* Барлық мәтіндер ап-анық ақ түсте */
+    /* Барлық мәтіндер кітап шрифтімен және қоңыр түсте */
     h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #ffffff !important;
+        color: #2c221e !important;
+        font-family: 'Merriweather', serif !important;
     }
 
-    /* Жоғарғы басты баннер (неон жиектелген) */
+    /* Жоғарғы басты баннер — кітап мұқабасы стилінде */
     .main-header {
-        background: rgba(18, 12, 42, 0.75);
-        backdrop-filter: blur(16px);
-        border: 2px solid #00ffff;
-        border-radius: 20px;
+        background: #4a3525;
+        border: 2px solid #8c6d53;
+        border-radius: 14px;
         padding: 25px;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
+        box-shadow: 0 4px 15px rgba(44, 34, 30, 0.15);
     }
     .main-header h1 {
-        font-size: 2.3rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, #ffffff 0%, #00ffff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #fdfbf7 !important;
+        font-size: 2.2rem;
+        font-weight: 700;
         margin-bottom: 5px;
     }
     .main-header p {
-        color: #cbd5e1 !important;
+        color: #dcd6c8 !important;
         font-size: 1rem;
         margin: 0;
     }
 
-    /* Суреттегідей күлгін/көк неон жиекті шыны карточкалар мен expander блоктары */
+    /* Кітап беті немесе карточка блоктары */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(15, 10, 35, 0.65) !important;
-        backdrop-filter: blur(16px) !important;
-        border: 2px solid #da70d6 !important;
-        border-radius: 20px !important;
-        box-shadow: 0 0 20px rgba(218, 112, 214, 0.3) !important;
+        background: #fdfbf7 !important;
+        border: 1px solid #d5cbb7 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 3px 10px rgba(44, 34, 30, 0.06) !important;
         padding: 15px !important;
     }
 
-    /* Суреттегідей сопақша (pill-shaped) градиентті неон батырмалар */
+    /* Батырмалар — «Кітап закладкасы» / былғары түптеме стилінде */
     .stButton > button {
-        background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%) !important;
-        color: #ffffff !important;
-        font-weight: 800 !important;
-        border: 1px solid rgba(255, 255, 255, 0.5) !important;
-        border-radius: 30px !important;
-        padding: 0.6rem 2.2rem !important;
-        box-shadow: 0 0 20px rgba(236, 72, 153, 0.6) !important;
-        text-transform: uppercase !important;
-        font-size: 0.85rem !important;
-        letter-spacing: 0.8px !important;
-        transition: all 0.3s ease !important;
+        background: #5c4033 !important;
+        color: #fdfbf7 !important;
+        font-weight: 600 !important;
+        border: 1px solid #3e2723 !important;
+        border-radius: 8px !important;
+        padding: 0.6rem 2rem !important;
+        box-shadow: 0 2px 6px rgba(44, 34, 30, 0.2) !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        transition: all 0.2s ease !important;
     }
     .stButton > button:hover {
-        transform: translateY(-2px) scale(1.02) !important;
-        box-shadow: 0 0 30px rgba(6, 182, 212, 0.8) !important;
+        background: #3e2723 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(44, 34, 30, 0.3) !important;
     }
 
     /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: rgba(10, 6, 25, 0.85) !important;
-        border: 1px solid rgba(218, 112, 214, 0.6) !important;
-        border-radius: 12px !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
+        background: #fdfbf7 !important;
+        border: 1px solid #bcaaa4 !important;
+        border-radius: 8px !important;
+        color: #2c221e !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Кестелер */
+    /* Кестелер мен радио батырмалар */
     [data-testid="stTable"], [data-testid="stDataFrame"] {
-        background: rgba(10, 6, 25, 0.75) !important;
-        border-radius: 14px !important;
-        border: 1px solid rgba(0, 255, 255, 0.4) !important;
+        background: #fdfbf7 !important;
+        border-radius: 10px !important;
+        border: 1px solid #d5cbb7 !important;
     }
 
     .stRadio label {
-        color: #ffffff !important;
-        font-weight: 600 !important;
+        color: #2c221e !important;
+        font-weight: 500 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -120,7 +115,7 @@ st.markdown("""
 # Басты беттің баннері
 st.markdown("""
     <div class="main-header">
-        <h1>UstazMentor 💻 7-сынып</h1>
+        <h1>UstazMentor 📖 7-сынып</h1>
         <p>Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
     </div>
 """, unsafe_allow_html=True)
@@ -550,36 +545,36 @@ else:
     elif "11." in selected_topic:
         st.markdown("### 📐 11-тақырып: Нысандардың 3D модельдері. Бекіту және қолдану")
         
-        q1 = st.radio("1. 3D редактордағы куб, цилиндр, сфера сияқты фигуралар қалай аталады?", ["А) Графикалық примитивтер", "Б) Анимациялар", "В) Текстуралар", "Г) Кодтар"], key="t11_1")
-        q2 = st.radio("2. Құмыра пішінін алу үшін қандай тәсілді қолданады?", ["А) Құмыраның қимасын ось бойымен айналдыру (Lathe/Spin құралы)", "Б) Тек кубты үлкейту", "В) Мәтін жазу", "Г) Суретті бояу"], key="t11_2")
-        q3 = st.radio("3. 3D модельде нысанның орнын жылжыту құралы?", ["А) Move (Жылжыту)", "Б) Scale (Масштабтау)", "В) Rotate (Бұру)", "Г) Delete (Өшіру)"], key="t11_3")
-        q4 = st.radio("4. Нысанның өлшемін кішірейту үшін қай құрал қолданылады?", ["А) Scale (Масштабтау)", "Б) Move (Жылжыту)", "В) Select (Таңдау)", "Г) Light (Жарық)"], key="t11_4")
-        q5 = st.radio("5. Орындықты үстелге қарай бұрып орналастыру құралы?", ["А) Rotate (Бұру)", "Б) Scale (Масштабтау)", "В) Extrude (Созу)", "Г) Copy (Көшіру)"], key="t11_5")
-        q6 = st.radio("6. Қарапайым примитивтерді біріктіру арқылы не жасауға болады?", ["А) Үстел, орындық немесе басқа күрделі 3D нысандар", "Б) Қарапайым мәтіндік құжат", "В) Электрондық кесте", "Г) Антивирус"], key="t11_6")
-        q7 = st.radio("7. Цилиндр пішінді ыдыстың негізгі параметрлері?", ["А) Биіктігі мен радиусын (немесе диаметрін)", "Б) Тек түсін", "В) Дыбыс жиілігін", "Г) Мәтін көлемін"], key="t11_7")
-        q8 = st.radio("8. 3D нысанның құрылымдық бөліктері қалай аталады?", ["А) Төбелер (Vertices), қабырғалар (Edges) және беттер (Faces)", "Б) Парақтар мен абзацтар", "В) Бағандар мен жолдар", "Г) Нөлдер мен бірліктер"], key="t11_8")
-        q9 = st.radio("9. Нысанның бетін сыртқа қарай созып, қалыңдығын өзгерту әдісі?", ["А) Extrude (Созу/шығару)", "Б) Copy (Көшіру)", "В) Paste (Қою)", "Г) Print (Басып шығару)"], key="t11_9")
-        q10 = st.radio("10. 3D модельдеу тапсырмасы оқушының қандай дағдысын дамытады?", ["А) Кеңістіктік ойлау мен шығармашылық қабілетті", "Б) Тек жылдам теруді", "В) Сурет салудан бас тартуды", "Г) Тек мәтіндік құжат жасауды"], key="t11_10")
+        q1 = st.radio("1. 3D редактордағы куб, цилиндр, сфера сияқты қарапайым геометриялық фигуралар қалай аталады?", ["А) Примитивтер", "Б) Текстуралар", "В) Анимациялар", "Г) Рендерлер"], key="t11_1")
+        q2 = st.radio("2. 3D нысанның бетіне түс немесе сурет (өрнек) беру үшін не қолданылады?", ["А) Материал және текстура", "Б) Камера", "В) Жарық көзі", "Г) Тор (Mesh)"], key="t11_2")
+        q3 = st.radio("3. 3D модельді әр түрлі бұрыштан көру үшін қандай құрал қолданылады?", ["А) Айналдыру (Orbit/Rotate view)", "Б) Өшіру", "В) Сақтау", "Г) Мұрағаттау"], key="t11_3")
+        q4 = st.radio("4. 3D редакторында нысанның көлемін бір бағытта немесе барлық бағытта үлкейту/кішірейту құралы:", ["А) Scale", "Б) Move", "В) Rotate", "Г) Extrude"], key="t11_4")
+        q5 = st.radio("5. Нысанды кеңістікте бір орыннан екінші орынға жылжыту командасы:", ["А) Move", "Б) Scale", "В) Render", "Г) Group"], key="t11_5")
+        q6 = st.radio("6. Дайын 3D үлгіні шынайы сурет немесе видео түріне айналдыру үдерісі:", ["А) Рендеринг (Rendering)", "Б) Архивация", "В) Кодтау", "Г) Форматтау"], key="t11_6")
+        q7 = st.radio("7. 3D графикада жарықтың дұрыс түсуі не үшін маңызды?", ["А) Нысанның көлемді әрі шынайы көрінуі үшін", "Б) Компьютерді қатыру үшін", "В) Файл өлшемін ұлғайту үшін", "Г) Түстерді өшіру үшін"], key="t11_7")
+        q8 = st.radio("8. 3D модельдеу кезінде нысанды бірнеше бөлікке бөлу немесе оның пішінін өзгерту үшін не қолданылады?", ["А) Төбелерді, қабырғаларды және беттерді өңдеу (Edit mode)", "Б) Компьютерді қайта қосу", "В) Интернетті өшіру", "Г) Дыбысты қосу"], key="t11_8")
+        q9 = st.radio("9. Архитекторлар мен дизайнерлер жаңа үйдің немесе бөлменің жобасын 3D форматта не үшін жасайды?", ["А) Құрылысты бастамас бұрын қателерді көріп, жобаны визуализациялау үшін", "Б) Тек уақыт өткізу үшін", "В) Қағаз шығынын арттыру үшін", "Г) Интернетті жылдамдату үшін"], key="t11_9")
+        q10 = st.radio("10. 3D модельдеу бағдарламаларында көріністі басқару үшін негізінен не қолданылады?", ["А) Тінтуір (мышь) және пернетақта", "Б) Тек принтер", "В) Тек сканер", "Г) Колонна"], key="t11_10")
 
         if st.button("Нәтижені тексеру", key="chk_btn_11"):
             if not student_name.strip():
                 st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
             else:
                 score = 0
-                if "Графикалық примитивтер" in q1: score += 1
-                if "Құмыраның қимасын ось бойымен" in q2: score += 1
-                if "Move (Жылжыту)" in q3: score += 1
-                if "Scale (Масштабтау)" in q4: score += 1
-                if "Rotate (Бұру)" in q5: score += 1
-                if "Үстел, орындық немесе басқа" in q6: score += 1
-                if "Биіктігі мен радиусын" in q7: score += 1
-                if "Төбелер (Vertices)" in q8: score += 1
-                if "Extrude (Созу/шығару)" in q9: score += 1
-                if "Кеңістіктік ойлау" in q10: score += 1
+                if "Примитивтер" in q1: score += 1
+                if "Материал және текстура" in q2: score += 1
+                if "Айналдыру" in q3: score += 1
+                if "Scale" in q4: score += 1
+                if "Move" in q5: score += 1
+                if "Рендеринг" in q6: score += 1
+                if "Нысанның көлемді" in q7: score += 1
+                if "Төбелерді, қабырғаларды" in q8: score += 1
+                if "Құрылысты бастамас бұрын" in q9: score += 1
+                if "Тінтуір" in q10: score += 1
                 
                 result_entry = {
                     "Оқушы аты": student_name,
-                    "Тақырып": "11-тақырып",
+                    "Тақырып": "11-тақырып (Тест)",
                     "Ұпай": f"{score} / 10",
                     "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
                 }
@@ -592,6 +587,6 @@ else:
     # --- 12-ТАҚЫРЫП ---
     elif "12." in selected_topic:
         st.markdown("### 🎬 12-тақырып: 3D анимация")
-        st.markdown("**Оқу мақсаты:** 7.3.2.1 — 3D анимация элементтері мен кадрлар ұғымын қолдану.")
-        st.markdown("Төмендегі батырманы басып, 3D анимация және кейс тапсырмаларын орындаңыз:")
-        st.link_button("🎬 12-тақырып платформасын ашу", "https://aliyateacher80-design.github.io/animation-game-7/")
+        st.markdown("**Оқу мақсаты:** 7.3.2.2 — 3D анимация құру принциптерін түсіну және қолдану.")
+        st.markdown("Төмендегі батырманы басып, интерактивті **3D Animation** ойынын ойнаңыз:")
+        st.link_button("🎬 12-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/animation-game-7/")
