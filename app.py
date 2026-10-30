@@ -9,117 +9,114 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. COLORFUL 3D PREMIUM DESIGN CSS LAYER
+# 2. EXACT NEON 3D GLASSMORPHISM CSS LAYER
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+    /* Басты фон: Күңгірт күлгін-көк 3D ғарыштық неон градиент */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 50%, #e2e8f0 100%) !important;
+        background: radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.25) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+                    radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.15) 0%, transparent 60%),
+                    #0a0718 !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #1e293b !important;
+        color: #ffffff !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.85) !important;
+        background: rgba(15, 11, 36, 0.85) !important;
         backdrop-filter: blur(20px) !important;
-        border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+        border-right: 1px solid rgba(224, 64, 251, 0.3) !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* 3D Gradient Banner */
+    /* Барлық мәтіндер ақ және анық */
+    h1, h2, h3, h4, h5, h6, p, span, label, div {
+        color: #ffffff !important;
+    }
+
+    /* 3D Glass Header Banner */
     .main-header {
-        background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-        padding: 40px 30px;
-        border-radius: 24px;
-        color: white;
+        background: rgba(22, 16, 48, 0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 2px solid #00e5ff;
+        border-radius: 20px;
+        padding: 30px;
         text-align: center;
         margin-bottom: 30px;
-        box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.4), 
-                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.2);
     }
     .main-header h1 {
-        font-size: 2.6rem;
+        font-size: 2.5rem;
         font-weight: 800;
-        color: white;
-        margin-bottom: 10px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        background: linear-gradient(90deg, #ffffff 0%, #00e5ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
     }
     .main-header p {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 1.15rem;
+        color: #d1d5db !important;
+        font-size: 1.1rem;
         margin: 0;
-        font-weight: 500;
     }
 
-    /* Glassmorphic Containers / Cards */
+    /* Neon Border Glass Cards */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(20, 15, 45, 0.6) !important;
         backdrop-filter: blur(16px) !important;
-        border: 1px solid rgba(255, 255, 255, 1) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05),
-                    0 1px 3px 0 rgba(0, 0, 0, 0.02) !important;
-        transition: all 0.3s ease !important;
-    }
-    div.stExpander:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px -5px rgba(99, 102, 241, 0.15) !important;
+        border: 2px solid #e040fb !important;
+        border-radius: 22px !important;
+        box-shadow: 0 0 20px rgba(224, 64, 251, 0.35) !important;
+        padding: 15px !important;
     }
 
-    /* Vibrant 3D Buttons */
+    /* Pill-shaped Gradient Glow Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%) !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        border: none !important;
-        border-radius: 14px !important;
-        padding: 0.7rem 2rem !important;
-        box-shadow: 0 8px 20px -4px rgba(139, 92, 246, 0.5) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%) !important;
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 30px !important;
+        padding: 0.65rem 2.2rem !important;
+        box-shadow: 0 0 20px rgba(236, 72, 153, 0.6) !important;
         text-transform: uppercase !important;
         font-size: 0.85rem !important;
         letter-spacing: 0.8px !important;
+        transition: all 0.3s ease !important;
     }
     .stButton > button:hover {
-        transform: translateY(-3px) scale(1.02) !important;
-        box-shadow: 0 12px 25px -4px rgba(217, 70, 239, 0.6) !important;
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c026d3 100%) !important;
+        transform: translateY(-3px) scale(1.03) !important;
+        box-shadow: 0 0 30px rgba(6, 182, 212, 0.8) !important;
     }
 
-    /* Inputs & Selectboxes */
+    /* Custom Inputs, Selectboxes & Select options */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: #ffffff !important;
-        border: 2px solid #e2e8f0 !important;
+        background: rgba(15, 11, 35, 0.8) !important;
+        border: 1px solid rgba(224, 64, 251, 0.5) !important;
         border-radius: 14px !important;
-        color: #0f172a !important;
-        font-weight: 500 !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02) !important;
-    }
-    .stTextInput > div > div > input:focus,
-    .stSelectbox > div > div > div:focus {
-        border-color: #8b5cf6 !important;
-        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15) !important;
-    }
-
-    /* Radio buttons */
-    .stRadio label {
-        color: #334155 !important;
+        color: #ffffff !important;
         font-weight: 600 !important;
     }
 
-    /* Tables */
+    /* Tables in dark style */
     [data-testid="stTable"], [data-testid="stDataFrame"] {
-        background: #ffffff !important;
+        background: rgba(15, 11, 35, 0.7) !important;
         border-radius: 16px !important;
-        border: 1px solid #e2e8f0 !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
+        border: 1px solid rgba(0, 229, 255, 0.4) !important;
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2) !important;
+    }
+
+    /* Radio button text contrast */
+    .stRadio label {
+        color: #ffffff !important;
+        font-weight: 600 !important;
     }
 </style>
 """, unsafe_allow_html=True)
