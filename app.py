@@ -9,40 +9,46 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. МЕКТЕП КАБИНЕТІ СТИЛІ ЖӘНЕ ФОН СУРЕТІ
+# 2. ҚАНЫҚ ФОН СУРЕТІ ЖӘНЕ Glassmorphism ДИЗАЙН
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Мектеп/Кабинет атмосферасын беретін ақшыл фон суреті және жеңіл күңгірттейтін қабат (overlay) */
+    /* Фонға қанық технологиялық сурет және жартылай қараңғы қабат */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(rgba(248, 250, 252, 0.90), rgba(248, 250, 252, 0.90)), 
-                    url("https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80") !important;
+        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)), 
+                    url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80") !important;
         background-size: cover !important;
         background-position: center !important;
         background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #1e293b !important;
+        color: #f8fafc !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(10px);
-        border-right: 1px solid #e2e8f0 !important;
+        background: rgba(15, 23, 42, 0.95) !important;
+        backdrop-filter: blur(12px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
+    /* Барлық мәтіндер ап-анық ақ/ашық түсте */
+    h1, h2, h3, h4, h5, h6, p, span, label, div {
+        color: #f8fafc !important;
+    }
+
     /* Жоғарғы басты баннер */
     .main-header {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 16px;
         padding: 25px;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
+        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
     }
     .main-header h1 {
         color: #ffffff !important;
@@ -51,52 +57,47 @@ st.markdown("""
         margin-bottom: 5px;
     }
     .main-header p {
-        color: #e0e7ff !important;
+        color: #e2e8f0 !important;
         font-size: 1rem;
         margin: 0;
     }
 
-    /* Мөлдірлеу әдемі карточкалар мен блоктапр */
+    /* Мөлдір, әдемі шыны карточкалар */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(8px);
-        border: 1px solid #cbd5e1 !important;
+        background: rgba(30, 41, 59, 0.75) !important;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-radius: 16px !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
         padding: 20px !important;
     }
 
-    /* Батырмалар стилі */
+    /* Қанық тартымды батырмалар */
     .stButton > button {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
-        border: none !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
         border-radius: 12px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4) !important;
         transition: all 0.3s ease !important;
         width: 100%;
     }
     .stButton > button:hover {
-        background: linear-gradient(135deg, #1d4ed8 100%, #1e40af 100%) !important;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4) !important;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6) !important;
     }
 
-    /* Енгізу өрістері мен selectbox */
+    /* Енгізу өрістері */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border: 1px solid #cbd5e1 !important;
+        background: rgba(15, 23, 42, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
         border-radius: 10px !important;
-        color: #1e293b !important;
-    }
-
-    /* Мәтіндердің түсі */
-    h1, h2, h3, h4, h5, h6, p, span, label {
-        color: #1e293b !important;
+        color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -165,7 +166,7 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
         if selected_class in st.session_state.results_db and len(st.session_state.results_db[selected_class]) > 0:
             st.table(st.session_state.results_db[selected_class])
         else:
-            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ. Оқушылар тапсырма тапсырған соң мұнда тізім шығады.")
+            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ.")
 
     st.subheader("⚙️ Сабақ баптаулары мен оқушы сілтемесі")
     save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
