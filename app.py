@@ -9,23 +9,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. EXACT NEON 3D GLASSMORPHISM CSS LAYER
+# 2. СУРЕТТЕГІДЕЙ EXACT NEON CYBERPUNK 3D DESIGN
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Басты фон: Күңгірт күлгін-көк 3D ғарыштық неон градиент */
+    /* Терең ғарыштық күңгірт неон фон */
     html, body, [data-testid="stAppViewContainer"] {
-        background: radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.25) 0%, transparent 40%),
-                    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
-                    radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.15) 0%, transparent 60%),
-                    #0a0718 !important;
+        background: radial-gradient(circle at 10% 10%, rgba(127, 0, 255, 0.2) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 90%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
+                    #070411 !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         color: #ffffff !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(15, 11, 36, 0.85) !important;
+        background: rgba(10, 7, 24, 0.9) !important;
         backdrop-filter: blur(20px) !important;
         border-right: 1px solid rgba(224, 64, 251, 0.3) !important;
     }
@@ -34,55 +33,54 @@ st.markdown("""
         background: transparent !important;
     }
 
-    /* Барлық мәтіндер ақ және анық */
+    /* Барлық мәтіндер ап-анық ақ түсте */
     h1, h2, h3, h4, h5, h6, p, span, label, div {
         color: #ffffff !important;
     }
 
-    /* 3D Glass Header Banner */
+    /* Жоғарғы басты баннер (неон жиектелген) */
     .main-header {
-        background: rgba(22, 16, 48, 0.65);
+        background: rgba(18, 12, 42, 0.75);
         backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 2px solid #00e5ff;
+        border: 2px solid #00ffff;
         border-radius: 20px;
-        padding: 30px;
+        padding: 25px;
         text-align: center;
-        margin-bottom: 30px;
-        box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.2);
+        margin-bottom: 25px;
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
     }
     .main-header h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         font-weight: 800;
-        background: linear-gradient(90deg, #ffffff 0%, #00e5ff 100%);
+        background: linear-gradient(90deg, #ffffff 0%, #00ffff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
     }
     .main-header p {
-        color: #d1d5db !important;
-        font-size: 1.1rem;
+        color: #cbd5e1 !important;
+        font-size: 1rem;
         margin: 0;
     }
 
-    /* Neon Border Glass Cards */
+    /* Суреттегідей күлгін/көк неон жиекті шыны карточкалар мен expander блоктары */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(20, 15, 45, 0.6) !important;
+        background: rgba(15, 10, 35, 0.65) !important;
         backdrop-filter: blur(16px) !important;
-        border: 2px solid #e040fb !important;
-        border-radius: 22px !important;
-        box-shadow: 0 0 20px rgba(224, 64, 251, 0.35) !important;
+        border: 2px solid #da70d6 !important;
+        border-radius: 20px !important;
+        box-shadow: 0 0 20px rgba(218, 112, 214, 0.3) !important;
         padding: 15px !important;
     }
 
-    /* Pill-shaped Gradient Glow Buttons */
+    /* Суреттегідей сопақша (pill-shaped) градиентті неон батырмалар */
     .stButton > button {
         background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%) !important;
         color: #ffffff !important;
         font-weight: 800 !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
         border-radius: 30px !important;
-        padding: 0.65rem 2.2rem !important;
+        padding: 0.6rem 2.2rem !important;
         box-shadow: 0 0 20px rgba(236, 72, 153, 0.6) !important;
         text-transform: uppercase !important;
         font-size: 0.85rem !important;
@@ -90,30 +88,28 @@ st.markdown("""
         transition: all 0.3s ease !important;
     }
     .stButton > button:hover {
-        transform: translateY(-3px) scale(1.03) !important;
+        transform: translateY(-2px) scale(1.02) !important;
         box-shadow: 0 0 30px rgba(6, 182, 212, 0.8) !important;
     }
 
-    /* Custom Inputs, Selectboxes & Select options */
+    /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: rgba(15, 11, 35, 0.8) !important;
-        border: 1px solid rgba(224, 64, 251, 0.5) !important;
-        border-radius: 14px !important;
+        background: rgba(10, 6, 25, 0.85) !important;
+        border: 1px solid rgba(218, 112, 214, 0.6) !important;
+        border-radius: 12px !important;
         color: #ffffff !important;
         font-weight: 600 !important;
     }
 
-    /* Tables in dark style */
+    /* Кестелер */
     [data-testid="stTable"], [data-testid="stDataFrame"] {
-        background: rgba(15, 11, 35, 0.7) !important;
-        border-radius: 16px !important;
-        border: 1px solid rgba(0, 229, 255, 0.4) !important;
-        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2) !important;
+        background: rgba(10, 6, 25, 0.75) !important;
+        border-radius: 14px !important;
+        border: 1px solid rgba(0, 255, 255, 0.4) !important;
     }
 
-    /* Radio button text contrast */
     .stRadio label {
         color: #ffffff !important;
         font-weight: 600 !important;
