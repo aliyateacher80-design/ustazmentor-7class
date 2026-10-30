@@ -9,42 +9,42 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. CANVA PREMIUM СТИЛІ ЖӘНЕ CSS ДИЗАЙН
+# 2. CANVA PREMIUM СТИЛІ ЖӘНЕ ЖАҚСАРТЫЛҒАН ФОН МЕН БАТЫРМАЛАР
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Canva Premium жұмсақ пастельді градиентті фон (Lavender, Sky blue, Soft pink, Peach, Cream white) */
+    /* Canva Premium тартымды, көрінетін пастельді-градиентті фон */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #fdfbf7 0%, #fef6f9 35%, #f0f7ff 70%, #f5f3ff 100%) !important;
+        background: linear-gradient(135deg, #f7f3fd 0%, #fdeff4 30%, #eef5ff 70%, #fdf6ec 100%) !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #2d3748 !important;
+        color: #1e293b !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.85) !important;
+        background: rgba(255, 255, 255, 0.92) !important;
         backdrop-filter: blur(12px);
-        border-right: 1px solid #f0e6f6 !important;
+        border-right: 1px solid #f3e8ff !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* Мәтіндер */
+    /* Барлық мәтіндерді қанық әрі анық етіп көрсету */
     h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #2d3748 !important;
+        color: #1e293b !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
     /* Canva Premium Басты баннер */
     .main-header {
-        background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #f472b6 100%);
+        background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #ec4899 100%);
         border-radius: 24px;
         padding: 35px;
         text-align: center;
         margin-bottom: 30px;
-        box-shadow: 0 15px 35px rgba(167, 139, 250, 0.25);
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25);
     }
     .main-header h1 {
         color: #ffffff !important;
@@ -54,53 +54,53 @@ st.markdown("""
         text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .main-header p {
-        color: #fef6f9 !important;
+        color: #fce7f3 !important;
         font-size: 1.1rem;
         font-weight: 500;
         margin: 0;
     }
 
-    /* Үлкен дөңгеленген карточкалар мен expander-лер (Soft Glassmorphism & Shadows) */
+    /* Үлкен дөңгеленген карточкалар (Soft Glassmorphism) */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(255, 255, 255, 0.9) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
         backdrop-filter: blur(10px);
-        border: 1px solid #fbcfe8 !important;
+        border: 2px solid #fbcfe8 !important;
         border-radius: 20px !important;
-        box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.08), 0 8px 10px -6px rgba(167, 139, 250, 0.08) !important;
+        box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.1), 0 8px 10px -6px rgba(139, 92, 246, 0.1) !important;
         padding: 24px !important;
         transition: all 0.3s ease !important;
     }
     div.stExpander:hover {
         transform: translateY(-3px);
-        box-shadow: 0 15px 30px -5px rgba(244, 114, 182, 0.15), 0 10px 15px -5px rgba(167, 139, 250, 0.12) !important;
+        box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.2), 0 10px 15px -5px rgba(139, 92, 246, 0.15) !important;
     }
 
-    /* Көз тартатын премиум батырмалар мен Hover анимациялары */
+    /* Көз тартатын, заманауи көлемді батырмалар */
     .stButton > button {
-        background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%) !important;
+        background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         border: none !important;
         border-radius: 14px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.25) !important;
+        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3) !important;
         transition: all 0.3s ease !important;
         width: 100%;
     }
     .stButton > button:hover {
         transform: translateY(-3px) scale(1.01);
-        box-shadow: 0 12px 25px rgba(236, 72, 153, 0.4) !important;
-        background: linear-gradient(135deg, #9333ea 0%, #db2777 100%) !important;
+        box-shadow: 0 12px 25px rgba(236, 72, 153, 0.45) !important;
+        background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%) !important;
     }
 
     /* Сілтеме батырмалары (Link Button) */
     .stLinkButton > a {
-        background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%) !important;
+        background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         border-radius: 14px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25) !important;
+        box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3) !important;
         text-align: center;
         text-decoration: none;
         display: block;
@@ -108,24 +108,24 @@ st.markdown("""
     }
     .stLinkButton > a:hover {
         transform: translateY(-3px) scale(1.01);
-        box-shadow: 0 12px 25px rgba(56, 189, 248, 0.4) !important;
+        box-shadow: 0 12px 25px rgba(14, 165, 233, 0.45) !important;
     }
 
-    /* Енгізу өрістері мен selectbox (Cream white & Peach реңктері) */
+    /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
         background: #ffffff !important;
         border: 2px solid #fed7aa !important;
         border-radius: 14px !important;
-        color: #2d3748 !important;
+        color: #1e293b !important;
         padding: 10px 15px !important;
         box-shadow: 0 2px 5px rgba(254, 215, 170, 0.2) !important;
     }
     .stTextInput > div > div > input:focus,
     .stSelectbox > div > div > div:focus {
-        border-color: #a78bfa !important;
-        box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2) !important;
+        border-color: #8b5cf6 !important;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
     }
 </style>
 """, unsafe_allow_html=True)
