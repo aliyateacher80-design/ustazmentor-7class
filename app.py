@@ -9,20 +9,25 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. ЖАҢАРТЫЛҒАН ЗАМАНАУИ «MODERN EDU» СТИЛІ ЖӘНЕ БАТЫРМАЛАР
+# 2. МЕКТЕП КАБИНЕТІ СТИЛІ ЖӘНЕ ФОН СУРЕТІ
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Жұмсақ заманауи кремді-ақ фон */
+    /* Мектеп/Кабинет атмосферасын беретін ақшыл фон суреті және жеңіл күңгірттейтін қабат (overlay) */
     html, body, [data-testid="stAppViewContainer"] {
-        background: #f8fafc !important;
+        background: linear-gradient(rgba(248, 250, 252, 0.90), rgba(248, 250, 252, 0.90)), 
+                    url("https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80") !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         color: #1e293b !important;
     }
 
     [data-testid="stSidebar"] {
-        background: #ffffff !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
         border-right: 1px solid #e2e8f0 !important;
     }
 
@@ -30,14 +35,14 @@ st.markdown("""
         background: transparent !important;
     }
 
-    /* Жоғарғы басты баннер (Заманауи корпоративті стиль) */
+    /* Жоғарғы басты баннер */
     .main-header {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         border-radius: 16px;
         padding: 25px;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
     }
     .main-header h1 {
         color: #ffffff !important;
@@ -51,56 +56,39 @@ st.markdown("""
         margin: 0;
     }
 
-    /* Карточкалар мен контейнерлер */
+    /* Мөлдірлеу әдемі карточкалар мен блоктапр */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: #ffffff !important;
-        border: 1px solid #e2e8f0 !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(8px);
+        border: 1px solid #cbd5e1 !important;
         border-radius: 16px !important;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
         padding: 20px !important;
     }
 
-    /* === БАТЫРМАЛАРДЫ ТҮБЕГЕЙЛІ ӨЗГЕРТУ === */
+    /* Батырмалар стилі */
     .stButton > button {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         border: none !important;
         border-radius: 12px !important;
         padding: 0.75rem 2rem !important;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
         transition: all 0.3s ease !important;
         width: 100%;
     }
     .stButton > button:hover {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+        background: linear-gradient(135deg, #1d4ed8 100%, #1e40af 100%) !important;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4) !important;
-    }
-
-    /* Сілтеме батырмалары (Link Button) үшін */
-    .stLinkButton > a {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        border-radius: 12px !important;
-        padding: 0.75rem 2rem !important;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-    }
-    .stLinkButton > a:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
     }
 
     /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: #ffffff !important;
+        background: rgba(255, 255, 255, 0.9) !important;
         border: 1px solid #cbd5e1 !important;
         border-radius: 10px !important;
         color: #1e293b !important;
