@@ -5,32 +5,142 @@ import datetime
 st.set_page_config(
     page_title="UstazMentor - 7-сынып Информатика",
     page_icon="💻",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# 2. Басты беттің баннері
+# 2. FUTURISTIC AI + 3D PREMIUM DESIGN CSS LAYER (ФУНКЦИОНАЛҒА ТИІСПЕЙДІ)
 st.markdown("""
-    <style>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    html, body, [data-testid="stAppViewContainer"] {
+        background: radial-gradient(circle at 10% 10%, rgba(127, 0, 255, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 90%, rgba(0, 242, 254, 0.1) 0%, transparent 45%),
+                    #070A12 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: #E2E8F0 !important;
+    }
+
+    [data-testid="stSidebar"] {
+        background: rgba(11, 15, 25, 0.8) !important;
+        backdrop-filter: blur(20px) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    [data-testid="stHeader"] {
+        background: transparent !important;
+    }
+
+    /* 3D Glassmorphism Header Banner */
     .main-header {
-        background-color: #2b6cb0;
-        padding: 30px 20px;
-        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.5) 100%);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 242, 254, 0.2);
+        padding: 35px 25px;
+        border-radius: 20px;
         color: white;
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
     }
     .main-header h1 {
-        color: white;
-        font-size: 38px;
-        font-weight: bold;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #FFFFFF 0%, #00F2FE 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 10px;
     }
     .main-header p {
-        color: #e2e8f0;
-        font-size: 16px;
+        color: #94A3B8;
+        font-size: 1.1rem;
         margin: 0;
+        letter-spacing: 0.5px;
     }
-    </style>
+
+    /* Glassmorphic Containers / Cards */
+    div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
+        background: rgba(255, 255, 255, 0.02) !important;
+        backdrop-filter: blur(14px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Futuristic Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, #7F00FF 0%, #00F2FE 100%) !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 0.6rem 1.8rem !important;
+        box-shadow: 0 4px 20px rgba(127, 0, 255, 0.4) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        text-transform: uppercase !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.5px !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6) !important;
+        background: linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%) !important;
+    }
+
+    /* Inputs, Selectboxes & Text Inputs */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > div,
+    .stNumberInput > div > div > input {
+        background: rgba(15, 23, 42, 0.7) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px !important;
+        color: #F8FAFC !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    .stTextInput > div > div > input:focus,
+    .stSelectbox > div > div > div:focus {
+        border-color: #00F2FE !important;
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important;
+    }
+
+    /* Radio buttons styling */
+    .stRadio label {
+        color: #CBD5E1 !important;
+        font-weight: 500 !important;
+    }
+
+    /* Tables & Metrics */
+    [data-testid="stTable"], [data-testid="stDataFrame"] {
+        background: rgba(15, 23, 42, 0.5) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #070A12;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 242, 254, 0.4);
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Басты беттің заманауи баннері
+st.markdown("""
     <div class="main-header">
         <h1>UstazMentor 💻 7-сынып</h1>
         <p>Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
@@ -391,124 +501,3 @@ else:
                 if "Жарық көздерін орнатып" in q4: score += 1
                 if "Дизайн, сәулет және құрылыс" in q5: score += 1
                 if "Модельдің камера түсіретін" in q6: score += 1
-                if ".obj, .fbx, .stl" in q7: score += 1
-                if "Материал немесе текстура" in q8: score += 1
-                if "Қымбат материалдарды" in q9: score += 1
-                if "Blender немесе 3ds Max" in q10: score += 1
-                
-                result_entry = {
-                    "Оқушы аты": student_name,
-                    "Тақырып": "9-тақырып",
-                    "Ұпай": f"{score} / 10",
-                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-                }
-                if student_class not in st.session_state.results_db:
-                    st.session_state.results_db[student_class] = []
-                st.session_state.results_db[student_class].append(result_entry)
-                
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
-
-    # --- 10-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
-    elif "10." in selected_topic:
-        st.markdown("### 📐 10-тақырып: Нысандардың 3D модельдері")
-        st.markdown("**Нұсқаулық:** Практикалық жағдаяттарды 3D модельдеу құралдарымен және әрекеттерімен сәйкестендіріңіз.")
-        
-        opts3 = [
-            "Таңдаңыз...",
-            "А) Move — нысанды жылжыту", "Ә) Scale — нысанның өлшемін өзгерту", "Б) Rotate — нысанды бұру",
-            "В) Графикалық примитивтерді қолдану", "Г) Айналу денесін құру", "Ғ) Extrude — нысанның бетін созу",
-            "Д) Примитивтерді біріктіріп, күрделі модель жасау", "Е) Нысанның геометриялық элементтерін өңдеу",
-            "Ж) Нысанның биіктігі мен радиусын өзгерту", "З) Цилиндр примитивін пайдалану"
-        ]
-        
-        c1 = st.selectbox("1. Оқушы 3D редакторда үстелдің аяқтарын жасау үшін цилиндр пішінін таңдады.", opts3, key="m3_1")
-        c2 = st.selectbox("2. Дизайнер бөлмедегі орындықты үстелдің жанына орналастыру үшін оның орнын өзгертті.", opts3, key="m3_2")
-        c3 = st.selectbox("3. Оқушы жасаған 3D орындықтың өлшемін кішірейтіп, макетке сәйкестендірді.", opts3, key="m3_3")
-        c4 = st.selectbox("4. Дизайнер құмыраның көлемді моделін жасау үшін оның қимасын ось бойымен айналдырды.", opts3, key="m3_4")
-        c5 = st.selectbox("5. Оқушы үстелдің үстіңгі тақтайын сыртқа қарай созып, оның пішінін өзгертті.", opts3, key="m3_5")
-        c6 = st.selectbox("6. Дизайнер орындықты үстелге қаратып бұру үшін арнайы құралды қолданды.", opts3, key="m3_6")
-        c7 = st.selectbox("7. Оқушы үстелдің моделін куб пен бірнеше цилиндрді біріктіру арқылы жасады.", opts3, key="m3_7")
-        c8 = st.selectbox("8. Дизайнер цилиндр пішінді ыдыстың биіктігі мен жуандығын өзгерту үшін оның параметрлерін реттеді.", opts3, key="m3_8")
-        c9 = st.selectbox("9. Оқушы 3D модельдің жекелеген төбелерін, қабырғалары мен беттерін таңдап өңдеді.", opts3, key="m3_9")
-        c10 = st.selectbox("10. Оқушы дөңгелек шамның көлемді моделін жасау үшін цилиндрдің үстіңгі және астыңғы бөліктерін өңдеді.", opts3, key="m3_10")
-
-        if st.button("Нәтижені тексеру", key="chk_m3"):
-            if not student_name.strip():
-                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
-            else:
-                score = 0
-                if "З) Цилиндр примитивін пайдалану" in c1: score += 1
-                if "А) Move — нысанды жылжыту" in c2: score += 1
-                if "Ә) Scale — нысанның өлшемін өзгерту" in c3: score += 1
-                if "Г) Айналу денесін құру" in c4: score += 1
-                if "Ғ) Extrude — нысанның бетін созу" in c5: score += 1
-                if "Б) Rotate — нысанды бұру" in c6: score += 1
-                if "Д) Примитивтерді біріктіріп" in c7: score += 1
-                if "Ж) Нысанның биіктігі мен радиусын" in c8: score += 1
-                if "Е) Нысанның геометриялық" in c9: score += 1
-                if "В) Графикалық примитивтерді" in c10: score += 1
-                
-                result_entry = {
-                    "Оқушы аты": student_name,
-                    "Тақырып": "10-тақырып",
-                    "Ұпай": f"{score} / 10",
-                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-                }
-                if student_class not in st.session_state.results_db:
-                    st.session_state.results_db[student_class] = []
-                st.session_state.results_db[student_class].append(result_entry)
-                
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
-
-    # --- 11-ТАҚЫРЫП (ТЕСТ) ---
-    elif "11." in selected_topic:
-        st.markdown("### 📐 11-тақырып: Нысандардың 3D модельдері. Бекіту және қолдану")
-        
-        q1 = st.radio("1. 3D редактордағы куб, цилиндр, сфера сияқты фигуралар қалай аталады?", ["А) Графикалық примитивтер", "Б) Анимациялар", "В) Текстуралар", "Г) Кодтар"], key="t11_1")
-        q2 = st.radio("2. Құмыра пішінін алу үшін қандай тәсілді қолданады?", ["А) Құмыраның қимасын ось бойымен айналдыру (Lathe/Spin құралы)", "Б) Тек кубты үлкейту", "В) Мәтін жазу", "Г) Суретті бояу"], key="t11_2")
-        q3 = st.radio("3. 3D модельде нысанның орнын жылжыту құралы?", ["А) Move (Жылжыту)", "Б) Scale (Масштабтау)", "В) Rotate (Бұру)", "Г) Delete (Өшіру)"], key="t11_3")
-        q4 = st.radio("4. Нысанның өлшемін кішірейту үшін қай құрал қолданылады?", ["А) Scale (Масштабтау)", "Б) Move (Жылжыту)", "В) Select (Таңдау)", "Г) Light (Жарық)"], key="t11_4")
-        q5 = st.radio("5. Орындықты үстелге қарай бұрып орналастыру құралы?", ["А) Rotate (Бұру)", "Б) Scale (Масштабтау)", "В) Extrude (Созу)", "Г) Copy (Көшіру)"], key="t11_5")
-        q6 = st.radio("6. Қарапайым примитивтерді біріктіру арқылы не жасауға болады?", ["А) Үстел, орындық немесе басқа күрделі 3D нысандар", "Б) Қарапайым мәтіндік құжат", "В) Электрондық кесте", "Г) Антивирус"], key="t11_6")
-        q7 = st.radio("7. Цилиндр пішінді ыдыстың негізгі параметрлері?", ["А) Биіктігі мен радиусын (немесе диаметрін)", "Б) Тек түсін", "В) Дыбыс жиілігін", "Г) Мәтін көлемін"], key="t11_7")
-        q8 = st.radio("8. 3D нысанның құрылымдық бөліктері қалай аталады?", ["А) Төбелер (Vertices), қабырғалар (Edges) және беттер (Faces)", "Б) Парақтар мен абзацтар", "В) Бағандар мен жолдар", "Г) Нөлдер мен бірліктер"], key="t11_8")
-        q9 = st.radio("9. Нысанның бетін сыртқа қарай созып, қалыңдығын өзгерту әдісі?", ["А) Extrude (Созу/шығару)", "Б) Copy (Көшіру)", "В) Paste (Қою)", "Г) Print (Басып шығару)"], key="t11_9")
-        q10 = st.radio("10. 3D модельдеу тапсырмасы оқушының қандай дағдысын дамытады?", ["А) Кеңістіктік ойлау мен шығармашылық қабілетті", "Б) Тек жылдам теруді", "В) Сурет салудан бас тартуды", "Г) Тек мәтіндік құжат жасауды"], key="t11_10")
-
-        if st.button("Нәтижені тексеру", key="chk_btn_11"):
-            if not student_name.strip():
-                st.warning("⚠️ Нәтижені сақтау үшін аты-жөніңізді енгізіңіз!")
-            else:
-                score = 0
-                if "Графикалық примитивтер" in q1: score += 1
-                if "Құмыраның қимасын ось бойымен" in q2: score += 1
-                if "Move (Жылжыту)" in q3: score += 1
-                if "Scale (Масштабтау)" in q4: score += 1
-                if "Rotate (Бұру)" in q5: score += 1
-                if "Үстел, орындық немесе басқа" in q6: score += 1
-                if "Биіктігі мен радиусын" in q7: score += 1
-                if "Төбелер (Vertices)" in q8: score += 1
-                if "Extrude (Созу/шығару)" in q9: score += 1
-                if "Кеңістіктік ойлау" in q10: score += 1
-                
-                result_entry = {
-                    "Оқушы аты": student_name,
-                    "Тақырып": "11-тақырып",
-                    "Ұпай": f"{score} / 10",
-                    "Уақыты": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-                }
-                if student_class not in st.session_state.results_db:
-                    st.session_state.results_db[student_class] = []
-                st.session_state.results_db[student_class].append(result_entry)
-                
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
-
-    # --- 12-ТАҚЫРЫП ---
-    elif "12." in selected_topic:
-        st.markdown("### 🎬 12-тақырып: 3D анимация")
-        st.markdown("**Оқу мақсаты:** 7.3.2.2 — 3D редакторы құралдарын пайдаланып, кілттік кадрлардағы нысандардың орнын, айналуын, масштабын орнату.")
-        st.markdown("Төмендегі батырманы басып, **3D Animation Studio** ойынын ойнаңыз:")
-        st.link_button("🎬 12-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/gamt-gamr77/")
-
-st.divider()
-st.markdown("<p style='text-align: center; color: #888;'>UstazMentor © 2026 | Аққыстау орта мектебі</p>", unsafe_allow_html=True)
