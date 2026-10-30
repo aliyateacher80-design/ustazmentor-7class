@@ -9,20 +9,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. ҚАНЫҚ ФОН СУРЕТІ ЖӘНЕ Glassmorphism ДИЗАЙН
+# 2. МӘТІНДЕР АП-АНЫҚ КӨРІНЕТІН ЖӘНЕ ТАРТЫМДЫ ДИЗАЙН
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     /* Фонға қанық технологиялық сурет және жартылай қараңғы қабат */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)), 
+        background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.88)), 
                     url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80") !important;
         background-size: cover !important;
         background-position: center !important;
         background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #f8fafc !important;
     }
 
     [data-testid="stSidebar"] {
@@ -35,29 +34,32 @@ st.markdown("""
         background: transparent !important;
     }
 
-    /* Барлық мәтіндер ап-анық ақ/ашық түсте */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #f8fafc !important;
+    /* ҚОЛДАНБАҒЫ БАРЛЫҚ МӘТІНДЕРДІ АП-АНЫҚ АҚ ТҮСЕ ЕТУ */
+    h1, h2, h3, h4, h5, h6, p, span, label, div, .stRadio label, .stMarkdown p {
+        color: #ffffff !important;
     }
 
-    /* Жоғарғы басты баннер */
+    /* Жоғарғы басты баннерді фонға үйлесетін әдемі шыны стильге келтіру */
     .main-header {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(30, 41, 59, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(59, 130, 246, 0.4);
         border-radius: 16px;
         padding: 25px;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
     }
     .main-header h1 {
-        color: #ffffff !important;
         font-size: 2.2rem;
         font-weight: 800;
+        background: linear-gradient(90deg, #ffffff 0%, #60a5fa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 5px;
     }
     .main-header p {
-        color: #e2e8f0 !important;
+        color: #cbd5e1 !important;
         font-size: 1rem;
         margin: 0;
     }
@@ -90,11 +92,14 @@ st.markdown("""
         box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6) !important;
     }
 
-    /* Енгізу өрістері */
+    /* Енгізу өрістері мен selectbox мәтіндерін ақ ету */
+    .stTextInput input, .stSelectbox div[data-baseweb="select"] span {
+        color: #ffffff !important;
+    }
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: rgba(15, 23, 42, 0.8) !important;
+        background: rgba(15, 23, 42, 0.85) !important;
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
         border-radius: 10px !important;
         color: #ffffff !important;
