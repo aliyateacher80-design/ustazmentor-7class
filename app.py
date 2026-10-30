@@ -3,142 +3,145 @@ import datetime
 
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
-    page_title="UstazMentor - 7-сынып Информатика",
-    page_icon="🌸",
+    page_title="UstazMentor - Duolingo Edition",
+    page_icon="🦉",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 2. CANVA PREMIUM СТИЛІ ЖӘНЕ ЖАҚСАРТЫЛҒАН ФОН МЕН БАТЫРМАЛАР
+# 2. DUOLINGO СТИЛІ ЖӘНЕ 3D ТАКТИЛЬДІ БАТЫРМАТАР
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
-    /* Canva Premium тартымды, көрінетін пастельді-градиентті фон */
+    /* Duolingo стиліндегі жұмсақ ақшыл-көкшіл фон */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #f7f3fd 0%, #fdeff4 30%, #eef5ff 70%, #fdf6ec 100%) !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-        color: #1e293b !important;
+        background: #f7f9fc !important;
+        font-family: 'Nunito', sans-serif !important;
+        color: #3c4257 !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(12px);
-        border-right: 1px solid #f3e8ff !important;
+        background: #ffffff !important;
+        border-right: 2px solid #e5e7eb !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* Барлық мәтіндерді қанық әрі анық етіп көрсету */
+    /* Барлық мәтіндер */
     h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #1e293b !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: #3c4257 !important;
+        font-family: 'Nunito', sans-serif !important;
     }
 
-    /* Canva Premium Басты баннер */
+    /* Duolingo баннері (Яркий, ойын стилінде) */
     .main-header {
-        background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #ec4899 100%);
+        background: linear-gradient(135deg, #58cc02 0%, #1cb0f6 100%);
         border-radius: 24px;
-        padding: 35px;
+        padding: 30px;
         text-align: center;
-        margin-bottom: 30px;
-        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25);
+        margin-bottom: 25px;
+        box-shadow: 0 8px 0 #3b9c00, 0 15px 25px rgba(88, 204, 2, 0.2);
+        border: 3px solid #ffffff;
     }
     .main-header h1 {
         color: #ffffff !important;
         font-size: 2.5rem;
-        font-weight: 800;
-        margin-bottom: 8px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        font-weight: 900;
+        margin-bottom: 5px;
+        text-shadow: 0 2px 0 rgba(0,0,0,0.15);
     }
     .main-header p {
-        color: #fce7f3 !important;
+        color: #f0fdf4 !important;
         font-size: 1.1rem;
-        font-weight: 500;
+        font-weight: 700;
         margin: 0;
     }
 
-    /* Үлкен дөңгеленген карточкалар (Soft Glassmorphism) */
+    /* Карточкалар (Қалың жиекті, жұмсақ дөңгеленген Duolingo карточкалары) */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(10px);
-        border: 2px solid #fbcfe8 !important;
+        background: #ffffff !important;
+        border: 2px solid #e5e7eb !important;
         border-radius: 20px !important;
-        box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.1), 0 8px 10px -6px rgba(139, 92, 246, 0.1) !important;
-        padding: 24px !important;
-        transition: all 0.3s ease !important;
-    }
-    div.stExpander:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.2), 0 10px 15px -5px rgba(139, 92, 246, 0.15) !important;
+        box-shadow: 0 6px 0 #e5e7eb !important;
+        padding: 22px !important;
+        margin-bottom: 15px !important;
     }
 
-    /* Көз тартатын, заманауи көлемді батырмалар */
+    /* DUOLINGO 3D ТАКТИЛЬДІ БАТЫРМАЛАР (Басқан кезде төмен түсетін эффект) */
     .stButton > button {
-        background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%) !important;
+        background-color: #58cc02 !important;
         color: #ffffff !important;
-        font-weight: 700 !important;
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
         border: none !important;
-        border-radius: 14px !important;
+        border-radius: 16px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3) !important;
-        transition: all 0.3s ease !important;
+        box-shadow: 0 6px 0 #46a302 !important;
+        transition: all 0.1s ease !important;
         width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     .stButton > button:hover {
-        transform: translateY(-3px) scale(1.01);
-        box-shadow: 0 12px 25px rgba(236, 72, 153, 0.45) !important;
-        background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%) !important;
+        background-color: #61d803 !important;
+        box-shadow: 0 6px 0 #46a302 !important;
+        transform: translateY(-1px);
+    }
+    .stButton > button:active {
+        transform: translateY(4px) !important;
+        box-shadow: 0 2px 0 #46a302 !important;
     }
 
-    /* Сілтеме батырмалары (Link Button) */
+    /* Сілтеме батырмалары (Көк Duolingo стиль) */
     .stLinkButton > a {
-        background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%) !important;
+        background-color: #1cb0f6 !important;
         color: #ffffff !important;
-        font-weight: 700 !important;
-        border-radius: 14px !important;
+        font-weight: 800 !important;
+        border-radius: 16px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3) !important;
+        box-shadow: 0 6px 0 #1899d6 !important;
         text-align: center;
         text-decoration: none;
         display: block;
-        transition: all 0.3s ease !important;
+        transition: all 0.1s ease !important;
     }
     .stLinkButton > a:hover {
-        transform: translateY(-3px) scale(1.01);
-        box-shadow: 0 12px 25px rgba(14, 165, 233, 0.45) !important;
+        background-color: #22c55e !important;
+        box-shadow: 0 6px 0 #16a34a !important;
     }
 
     /* Енгізу өрістері мен selectbox */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: #ffffff !important;
-        border: 2px solid #fed7aa !important;
-        border-radius: 14px !important;
-        color: #1e293b !important;
+        background: #f7f9fc !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 16px !important;
+        color: #3c4257 !important;
+        font-weight: 700 !important;
         padding: 10px 15px !important;
-        box-shadow: 0 2px 5px rgba(254, 215, 170, 0.2) !important;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.02) !important;
     }
     .stTextInput > div > div > input:focus,
     .stSelectbox > div > div > div:focus {
-        border-color: #8b5cf6 !important;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+        border-color: #1cb0f6 !important;
+        box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.2) !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Басты беттің баннері
+# Басты баннер
 st.markdown("""
     <div class="main-header">
-        <h1>✨ UstazMentor 🌸 7-сынып</h1>
-        <p>Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
+        <h1>🦉 UstazMentor • Duolingo Edition</h1>
+        <p>💚 Бір тақырып — бір өмірлік жағдаят — нақты нәтиже! Ойна, үйрен, жеңіске жет!</p>
     </div>
 """, unsafe_allow_html=True)
 
-# Сессияда сыныптар тізімін және нәтижелер базасын сақтау
+# Сессияда сыныптар мен нәтижелерді сақтау
 if 'classes_list' not in st.session_state:
     st.session_state.classes_list = ["7 «А»", "7 «Ә»"]
 
@@ -167,12 +170,12 @@ topics_list = [
 ]
 
 # ==========================================
-# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ (PREMIUM DASHBOARD)
+# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ
 # ==========================================
 if mode == "👩‍🏫 Мұғалім кабинеті":
-    st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті (Premium Dashboard)")
+    st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті (Teacher Dashboard)")
     
-    with st.expander("📊 Teacher Dashboard — Сыныптар мен оқушылар нәтижелері", expanded=True):
+    with st.expander("📊 Сыныптар мен оқушылар нәтижелері", expanded=True):
         col1, col2 = st.columns([2, 1])
         with col1:
             selected_class = st.selectbox("Сыныпты таңдаңыз:", st.session_state.classes_list)
@@ -195,7 +198,7 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
         if selected_class in st.session_state.results_db and len(st.session_state.results_db[selected_class]) > 0:
             st.table(st.session_state.results_db[selected_class])
         else:
-            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ. Оқушылар тапсырма тапсырған соң мұнда тізім шығады.")
+            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ.")
 
     st.subheader("⚙️ Сабақ баптаулары мен оқушы сілтемесі")
     save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
@@ -276,7 +279,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score1} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Керемет! {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score1} ұпай** жинадыңыз! 🚀")
 
     # --- 2-ТАҚЫРЫП (ТЕСТ) ---
     elif "2." in selected_topic:
@@ -348,7 +351,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Жарайсың, {student_class} оқушысы **{student_name}**! 10 ұпайдан **{score} ұпай** жинадың! 🌟")
 
     # --- 3-ТАҚЫРЫП ---
     elif "3." in selected_topic:
@@ -398,7 +401,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Керемет! **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 5-ТАҚЫРЫП ---
     elif "5." in selected_topic:
@@ -449,7 +452,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score6} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Жұлдызды нәтиже! **{student_name}**, сіз 10 ұпайдан **{score6} ұпай** жинадыңыз!")
 
     # --- 7-ТАҚЫРЫП ---
     elif "7." in selected_topic:
@@ -506,7 +509,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Тамаша! **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 10-ТАҚЫРЫП (СӘЙКЕСТЕНДІРУ) ---
     elif "10." in selected_topic:
@@ -558,7 +561,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Керемет! **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 11-ТАҚЫРЫП (ТЕСТ) ---
     elif "11." in selected_topic:
@@ -601,7 +604,7 @@ else:
                     st.session_state.results_db[student_class] = []
                 st.session_state.results_db[student_class].append(result_entry)
                 
-                st.success(f"🎉 {student_class} оқушысы **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз және нәтиже базаға сақталды!")
+                st.success(f"🎉 Керемет! **{student_name}**, сіз 10 ұпайдан **{score} ұпай** жинадыңыз!")
 
     # --- 12-ТАҚЫРЫП ---
     elif "12." in selected_topic:
