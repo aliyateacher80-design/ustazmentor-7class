@@ -4,105 +4,128 @@ import datetime
 # 1. Беттің негізгі баптаулары
 st.set_page_config(
     page_title="UstazMentor - 7-сынып Информатика",
-    page_icon="💻",
+    page_icon="🌸",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 2. МӘТІНДЕР АП-АНЫҚ КӨРІНЕТІН ЖӘНЕ ТАРТЫМДЫ ДИЗАЙН
+# 2. CANVA PREMIUM СТИЛІ ЖӘНЕ CSS ДИЗАЙН
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Фонға қанық технологиялық сурет және жартылай қараңғы қабат */
+    /* Canva Premium жұмсақ пастельді градиентті фон (Lavender, Sky blue, Soft pink, Peach, Cream white) */
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.88)), 
-                    url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80") !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-attachment: fixed !important;
+        background: linear-gradient(135deg, #fdfbf7 0%, #fef6f9 35%, #f0f7ff 70%, #f5f3ff 100%) !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: #2d3748 !important;
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(15, 23, 42, 0.95) !important;
+        background: rgba(255, 255, 255, 0.85) !important;
         backdrop-filter: blur(12px);
-        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-right: 1px solid #f0e6f6 !important;
     }
 
     [data-testid="stHeader"] {
         background: transparent !important;
     }
 
-    /* ҚОЛДАНБАҒЫ БАРЛЫҚ МӘТІНДЕРДІ АП-АНЫҚ АҚ ТҮСЕ ЕТУ */
-    h1, h2, h3, h4, h5, h6, p, span, label, div, .stRadio label, .stMarkdown p {
-        color: #ffffff !important;
+    /* Мәтіндер */
+    h1, h2, h3, h4, h5, h6, p, span, label, div {
+        color: #2d3748 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Жоғарғы басты баннерді фонға үйлесетін әдемі шыны стильге келтіру */
+    /* Canva Premium Басты баннер */
     .main-header {
-        background: rgba(30, 41, 59, 0.75);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(59, 130, 246, 0.4);
-        border-radius: 16px;
-        padding: 25px;
+        background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #f472b6 100%);
+        border-radius: 24px;
+        padding: 35px;
         text-align: center;
-        margin-bottom: 25px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(167, 139, 250, 0.25);
     }
     .main-header h1 {
-        font-size: 2.2rem;
+        color: #ffffff !important;
+        font-size: 2.5rem;
         font-weight: 800;
-        background: linear-gradient(90deg, #ffffff 0%, #60a5fa 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .main-header p {
-        color: #cbd5e1 !important;
-        font-size: 1rem;
+        color: #fef6f9 !important;
+        font-size: 1.1rem;
+        font-weight: 500;
         margin: 0;
     }
 
-    /* Мөлдір, әдемі шыны карточкалар */
+    /* Үлкен дөңгеленген карточкалар мен expander-лер (Soft Glassmorphism & Shadows) */
     div.stExpander, [data-testid="stVerticalBlock"] > div[style*="flex"] {
-        background: rgba(30, 41, 59, 0.75) !important;
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 16px !important;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-        padding: 20px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid #fbcfe8 !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.08), 0 8px 10px -6px rgba(167, 139, 250, 0.08) !important;
+        padding: 24px !important;
+        transition: all 0.3s ease !important;
+    }
+    div.stExpander:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px -5px rgba(244, 114, 182, 0.15), 0 10px 15px -5px rgba(167, 139, 250, 0.12) !important;
     }
 
-    /* Қанық тартымды батырмалар */
+    /* Көз тартатын премиум батырмалар мен Hover анимациялары */
     .stButton > button {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+        background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        border-radius: 12px !important;
+        border: none !important;
+        border-radius: 14px !important;
         padding: 0.75rem 2rem !important;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4) !important;
+        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.25) !important;
         transition: all 0.3s ease !important;
         width: 100%;
     }
     .stButton > button:hover {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6) !important;
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 12px 25px rgba(236, 72, 153, 0.4) !important;
+        background: linear-gradient(135deg, #9333ea 0%, #db2777 100%) !important;
     }
 
-    /* Енгізу өрістері мен selectbox мәтіндерін ақ ету */
-    .stTextInput input, .stSelectbox div[data-baseweb="select"] span {
+    /* Сілтеме батырмалары (Link Button) */
+    .stLinkButton > a {
+        background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%) !important;
         color: #ffffff !important;
+        font-weight: 700 !important;
+        border-radius: 14px !important;
+        padding: 0.75rem 2rem !important;
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25) !important;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        transition: all 0.3s ease !important;
     }
+    .stLinkButton > a:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 12px 25px rgba(56, 189, 248, 0.4) !important;
+    }
+
+    /* Енгізу өрістері мен selectbox (Cream white & Peach реңктері) */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stNumberInput > div > div > input {
-        background: rgba(15, 23, 42, 0.85) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 10px !important;
-        color: #ffffff !important;
+        background: #ffffff !important;
+        border: 2px solid #fed7aa !important;
+        border-radius: 14px !important;
+        color: #2d3748 !important;
+        padding: 10px 15px !important;
+        box-shadow: 0 2px 5px rgba(254, 215, 170, 0.2) !important;
+    }
+    .stTextInput > div > div > input:focus,
+    .stSelectbox > div > div > div:focus {
+        border-color: #a78bfa !important;
+        box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -110,7 +133,7 @@ st.markdown("""
 # Басты беттің баннері
 st.markdown("""
     <div class="main-header">
-        <h1>UstazMentor 💻 7-сынып</h1>
+        <h1>✨ UstazMentor 🌸 7-сынып</h1>
         <p>Бір тақырып — бір өмірлік жағдаят — нақты нәтиже!</p>
     </div>
 """, unsafe_allow_html=True)
@@ -126,7 +149,7 @@ if 'results_db' not in st.session_state:
 mode = st.radio("Режимді таңдаңыз:", ["👨‍🎓 Оқушы режимі", "👩‍🏫 Мұғалім кабинеті"], horizontal=True)
 st.divider()
 
-# 12 ресми тақырып тізімі
+# 13 ресми тақырып тізімі
 topics_list = [
     "1. Жеке қауіпсіздік және ондағы сервистік программалардың рөлі (Сәйкестендіру)",
     "2. Жеке қауіпсіздік және ондағы сервистік программалардың рөлі (Тест)",
@@ -139,14 +162,15 @@ topics_list = [
     "9. Үш өлшемді графика редакторы. Бекіту және қолдану (Тест)",
     "10. Нысандардың 3D модельдері (Сәйкестендіру)",
     "11. Нысандардың 3D модельдері. Бекіту және қолдану (Тест)",
-    "12. 3D анимация"
+    "12. 3D анимация",
+    "13. Қорытынды практикалық жоба"
 ]
 
 # ==========================================
-# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ
+# 👩‍🏫 МҰҒАЛІМ КАБИНЕТІ (PREMIUM DASHBOARD)
 # ==========================================
 if mode == "👩‍🏫 Мұғалім кабинеті":
-    st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті")
+    st.subheader("👩‍🏫 Мұғалімнің басқару кабинеті (Premium Dashboard)")
     
     with st.expander("📊 Teacher Dashboard — Сыныптар мен оқушылар нәтижелері", expanded=True):
         col1, col2 = st.columns([2, 1])
@@ -171,7 +195,7 @@ if mode == "👩‍🏫 Мұғалім кабинеті":
         if selected_class in st.session_state.results_db and len(st.session_state.results_db[selected_class]) > 0:
             st.table(st.session_state.results_db[selected_class])
         else:
-            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ.")
+            st.info(f"ℹ️ {selected_class} бойынша әзірге сақталған нәтижелер жоқ. Оқушылар тапсырма тапсырған соң мұнда тізім шығады.")
 
     st.subheader("⚙️ Сабақ баптаулары мен оқушы сілтемесі")
     save_results = st.toggle("Оқушы нәтижелерін базаға сақтау", value=True)
@@ -585,3 +609,10 @@ else:
         st.markdown("**Оқу мақсаты:** 7.3.2.2 — 3D анимация құру принциптерін түсіну және қолдану.")
         st.markdown("Төмендегі батырманы басып, интерактивті **3D Animation** ойынын ойнаңыз:")
         st.link_button("🎬 12-тақырып ойынын ашу", "https://aliyateacher80-design.github.io/animation-game-7/")
+
+    # --- 13-ТАҚЫРЫП ---
+    elif "13." in selected_topic:
+        st.markdown("### 🏆 13-тақырып: Қорытынды практикалық жоба")
+        st.markdown("**Оқу мақсаты:** Барлық өткен модульдер бойынша алған білімді практикада жинақтау.")
+        st.markdown("Төмендегі батырманы басып, қорытынды жоба тапсырмасын орындаңыз:")
+        st.link_button("🚀 Қорытынды жобаны ашу", "https://aliyateacher80-design.github.io/final-project-7/")
